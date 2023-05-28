@@ -213,6 +213,7 @@ export default function App({ appTitle, useCustom, customArgs }: AppProps) {
               type: ROUNDNESS.ADAPTIVE_RADIUS,
               value: 32,
             },
+            terraform: null,
           },
         ],
         null,

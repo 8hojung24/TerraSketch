@@ -249,6 +249,7 @@ export const actionWrapTextInContainer = register({
             "rectangle",
           ),
           groupIds: textElement.groupIds,
+          terraform: null,
         });
 
         // update bindings

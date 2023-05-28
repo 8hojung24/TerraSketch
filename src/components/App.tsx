@@ -1788,6 +1788,7 @@ class App extends React.Component<AppProps, AppState> {
             y: currentY,
             text,
             lineHeight,
+            terraform: null,
           });
           acc.push(element);
           currentY += element.height + LINE_GAP;
@@ -2789,6 +2790,7 @@ class App extends React.Component<AppProps, AppState> {
           groupIds: container?.groupIds ?? [],
           lineHeight,
           angle: container?.angle ?? 0,
+          terraform:null,
         });
 
     if (!existingTextElement && shouldBindToContainer && container) {
@@ -4331,6 +4333,7 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       simulatePressure: event.pressure === 0.5,
       locked: false,
+      terraform:null,
     });
 
     this.setState((prevState) => ({
@@ -4387,6 +4390,7 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       opacity: this.state.currentItemOpacity,
       locked: false,
+      terraform:null,
     });
 
     return element;
@@ -4478,6 +4482,7 @@ class App extends React.Component<AppProps, AppState> {
         startArrowhead,
         endArrowhead,
         locked: false,
+        terraform:null,
       });
       this.setState((prevState) => ({
         selectedElementIds: {
@@ -4534,6 +4539,7 @@ class App extends React.Component<AppProps, AppState> {
             }
           : null,
       locked: false,
+      terraform:null,
     });
 
     if (element.type === "selection") {

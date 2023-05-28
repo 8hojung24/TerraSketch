@@ -143,6 +143,7 @@ export class API {
       | "groupIds"
       | "link"
       | "updated"
+      | "terraform"
     > = {
       x,
       y,
@@ -178,6 +179,7 @@ export class API {
           width,
           height,
           ...base,
+          terraform: null,
         });
         break;
       case "text":
@@ -191,6 +193,7 @@ export class API {
           textAlign: rest.textAlign ?? appState.currentItemTextAlign,
           verticalAlign: rest.verticalAlign ?? DEFAULT_VERTICAL_ALIGN,
           containerId: rest.containerId ?? undefined,
+          terraform: null,
         });
         element.width = width;
         element.height = height;
@@ -200,6 +203,7 @@ export class API {
           type: type as "freedraw",
           simulatePressure: true,
           ...base,
+          terraform: null,
         });
         break;
       case "arrow":
@@ -215,6 +219,7 @@ export class API {
             [0, 0],
             [100, 100],
           ],
+          terraform: null,
         });
         break;
       case "image":
@@ -226,6 +231,7 @@ export class API {
           fileId: (rest.fileId as string as FileId) ?? null,
           status: rest.status || "saved",
           scale: rest.scale || [1, 1],
+          terraform: null,
         });
         break;
     }
