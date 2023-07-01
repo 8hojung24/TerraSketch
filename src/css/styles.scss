@@ -652,3 +652,36 @@
     }
   }
 }
+
+.code-editor{
+  position: relative;
+  width: 100%;
+  height: 90%;
+  border-radius: 0.25rem;
+&__textarea, &__present {
+  //color: $weview-white;
+  color: white;
+  font-size: 1.25rem;
+  position: absolute;
+  margin: 0;
+  width: calc(100% - 1em);
+  height: calc(100% - 1em);
+  padding: 0.5em;
+}
+&__textarea {
+  //caret-color: $alert;
+  caret-color: red;
+  color: transparent;
+  background-color: transparent;
+  z-index: 1;
+  border: none;
+  resize: none;
+}
+&__present{
+  background-color: black;
+  color: #c9d1d9;
+  z-index: 0;
+  border-radius: 0.25rem;
+  text-overflow: ellipsis;
+}
+}

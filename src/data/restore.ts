@@ -142,6 +142,7 @@ const restoreElementWithProperties = <
     updated: element.updated ?? getUpdatedTimestamp(),
     link: element.link ?? null,
     locked: element.locked ?? false,
+    terraform: element.terraform ?? null,
   };
 
   if ("customData" in element) {
