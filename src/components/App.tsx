@@ -2790,7 +2790,11 @@ class App extends React.Component<AppProps, AppState> {
           groupIds: container?.groupIds ?? [],
           lineHeight,
           angle: container?.angle ?? 0,
+<<<<<<< HEAD
           terraform : null,
+=======
+          terraform:null,
+>>>>>>> e43e04edb1c4df5d1a56cff7c8f821ee5b9a07b6
         });
 
     if (!existingTextElement && shouldBindToContainer && container) {
@@ -4333,7 +4337,11 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       simulatePressure: event.pressure === 0.5,
       locked: false,
+<<<<<<< HEAD
       terraform : null,
+=======
+      terraform:null,
+>>>>>>> e43e04edb1c4df5d1a56cff7c8f821ee5b9a07b6
     });
 
     this.setState((prevState) => ({
@@ -4390,7 +4398,11 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       opacity: this.state.currentItemOpacity,
       locked: false,
+<<<<<<< HEAD
       terraform : null,
+=======
+      terraform:null,
+>>>>>>> e43e04edb1c4df5d1a56cff7c8f821ee5b9a07b6
     });
 
     return element;
@@ -4482,7 +4494,11 @@ class App extends React.Component<AppProps, AppState> {
         startArrowhead,
         endArrowhead,
         locked: false,
+<<<<<<< HEAD
         terraform : null,
+=======
+        terraform:null,
+>>>>>>> e43e04edb1c4df5d1a56cff7c8f821ee5b9a07b6
       });
       this.setState((prevState) => ({
         selectedElementIds: {
@@ -4539,7 +4555,11 @@ class App extends React.Component<AppProps, AppState> {
             }
           : null,
       locked: false,
+<<<<<<< HEAD
       terraform : null,
+=======
+      terraform:null,
+>>>>>>> e43e04edb1c4df5d1a56cff7c8f821ee5b9a07b6
     });
 
     if (element.type === "selection") {

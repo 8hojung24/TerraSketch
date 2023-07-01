@@ -118,7 +118,11 @@ const _newElementBase = <T extends ExcalidrawElement>(
     updated: getUpdatedTimestamp(),
     link,
     locked,
+<<<<<<< HEAD
     terraform : null,
+=======
+    terraform: null,
+>>>>>>> e43e04edb1c4df5d1a56cff7c8f821ee5b9a07b6
   };
   return element;
 };
