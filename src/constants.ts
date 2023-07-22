@@ -290,3 +290,10 @@ export const DEFAULT_SIDEBAR = {
   name: "default",
   defaultTab: LIBRARY_SIDEBAR_TAB,
 } as const;
+
+export const TERRAFORMCODE_SIDEBAR_TAB="terraformCode";
+
+export const TERRAFORMCODE_SIDEBAR ={
+  name: "terraformcode",
+  defaultTab : TERRAFORMCODE_SIDEBAR_TAB,
+} as const;

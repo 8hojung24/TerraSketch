@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB } from "../constants";
+import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB } from "../constants";
 import { useTunnels } from "../context/tunnels";
 import { useUIAppState } from "../context/ui-appState";
 import { t } from "../i18n";
@@ -114,5 +114,113 @@ export const DefaultSidebar = Object.assign(
   {
     Trigger: DefaultSidebarTrigger,
     TabTriggers: DefaultTabTriggers,
+  },
+);
+
+//여기서부터 TERRAFORMCODE_SIDEBAR 개발
+
+const TerraformCodeSidebarTrigger = withInternalFallback(
+  "TerraformCodeSidebarTrigger",
+  (
+    props: Omit<SidebarTriggerProps, "name"> &
+      React.HTMLAttributes<HTMLDivElement>,
+  ) => {
+    const { TerraformCodeSidebarTriggerTunnel } = useTunnels();
+    return (
+      <TerraformCodeSidebarTriggerTunnel.In>
+        <Sidebar.Trigger
+          {...props}
+          className="default-sidebar-trigger"
+          name={TERRAFORMCODE_SIDEBAR.name}
+        />
+      </TerraformCodeSidebarTriggerTunnel.In>
+    );
+  },
+);
+TerraformCodeSidebarTrigger.displayName = "TerraformCodeSidebarTrigger";
+
+const TerraformCodeTabTriggers = ({
+  children,
+  ...rest
+}: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) => {
+  const { TerraformCodeSidebarTabTriggersTunnel } = useTunnels();
+  return (
+    <TerraformCodeSidebarTabTriggersTunnel.In>
+      <Sidebar.TabTriggers {...rest}>{children}</Sidebar.TabTriggers>
+    </TerraformCodeSidebarTabTriggersTunnel.In>
+  );
+};
+TerraformCodeTabTriggers.displayName = "TerraformCodeTabTriggers";
+
+export const TerraformCodeSidebar = Object.assign(
+  withInternalFallback(
+    "TerraformCodeSidebar",
+    ({
+      children,
+      className,
+      onDock,
+      docked,
+      ...rest
+    }: Merge<
+      MarkOptional<Omit<SidebarProps, "name">, "children">,
+      {
+        /** pass `false` to disable docking */
+        onDock?: SidebarProps["onDock"] | false;
+      }
+    >) => {
+      const appState = useUIAppState();
+      const setAppState = useExcalidrawSetAppState();
+
+      const { TerraformCodeSidebarTabTriggersTunnel } = useTunnels();
+
+      return (
+        <Sidebar
+          {...rest}
+          name="terraformcode"
+          key="terraformcode"
+          className={clsx("default-sidebar", className)}
+          docked={docked ?? appState.terraformcodeSidebarDockedPreference}
+          onDock={
+            // `onDock=false` disables docking.
+            // if `docked` passed, but no onDock passed, disable manual docking.
+            onDock === false || (!onDock && docked != null)
+              ? undefined
+              : // compose to allow the host app to listen on default behavior
+                composeEventHandlers(onDock, (docked) => {
+                  setAppState({ terraformcodeSidebarDockedPreference: docked });
+                })
+          }
+        >
+          <Sidebar.Tabs>
+            <Sidebar.Header>
+              {rest.__fallback && (
+                <div
+                  style={{
+                    color: "var(--color-primary)",
+                    fontSize: "1.2em",
+                    fontWeight: "bold",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    paddingRight: "1em",
+                  }}
+                >
+                  {t("toolBar.library")}
+                </div>
+              )}
+              <TerraformCodeSidebarTabTriggersTunnel.Out />
+            </Sidebar.Header>
+            <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
+              <LibraryMenu />
+            </Sidebar.Tab>
+            {children}
+          </Sidebar.Tabs>
+        </Sidebar>
+      );
+    },
+  ),
+  {
+    Trigger: TerraformCodeSidebarTrigger,
+    TabTriggers: TerraformCodeTabTriggers,
   },
 );

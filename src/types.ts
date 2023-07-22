@@ -174,6 +174,7 @@ export type AppState = {
    * a DefaultSidebar prop, which is not reflected back to the appState.
    */
   defaultSidebarDockedPreference: boolean;
+  terraformcodeSidebarDockedPreference: boolean;
 
   lastPointerDownWith: PointerType;
   selectedElementIds: { [id: string]: boolean };

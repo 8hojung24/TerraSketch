@@ -12,6 +12,8 @@ type TunnelsContextValue = {
   FooterCenterTunnel: Tunnel;
   DefaultSidebarTriggerTunnel: Tunnel;
   DefaultSidebarTabTriggersTunnel: Tunnel;
+  TerraformCodeSidebarTriggerTunnel: Tunnel;
+  TerraformCodeSidebarTabTriggersTunnel: Tunnel;
   jotaiScope: symbol;
 };
 
@@ -30,6 +32,8 @@ export const useInitializeTunnels = () => {
       FooterCenterTunnel: tunnel(),
       DefaultSidebarTriggerTunnel: tunnel(),
       DefaultSidebarTabTriggersTunnel: tunnel(),
+      TerraformCodeSidebarTriggerTunnel: tunnel(),
+      TerraformCodeSidebarTabTriggersTunnel: tunnel(),
       jotaiScope: Symbol(),
     };
   }, []);

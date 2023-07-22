@@ -1579,3 +1579,23 @@ export const helpIcon = createIcon(
   </>,
   tablerIconProps,
 );
+
+export const TerraformIcon = createIcon(
+  <g strokeWidth="1.5">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-weight="bold">
+      T
+    </text>
+  </g>,
+  tablerIconProps,
+);
+
+export const AWSIcon = createIcon(
+  <g strokeWidth="1.5">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-weight="bold">
+      A
+    </text>
+  </g>,
+  tablerIconProps,
+);
