@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import { ActionManager } from "../actions/manager";
-import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH } from "../constants";
+import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB } from "../constants";
 import { isTextElement, showSelectedShapeActions } from "../element";
 import { NonDeletedExcalidrawElement } from "../element/types";
 import { Language, t } from "../i18n";
@@ -44,9 +44,9 @@ import { ActiveConfirmDialog } from "./ActiveConfirmDialog";
 import { HandButton } from "./HandButton";
 import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
-import { LibraryIcon } from "./icons";
+import { LibraryIcon, TerraformIcon } from "./icons";
 import { UIAppStateContext } from "../context/ui-appState";
-import { DefaultSidebar } from "./DefaultSidebar";
+import { DefaultSidebar,TerraformCodeSidebar } from "./DefaultSidebar";
 
 import "./LayerUI.scss";
 import "./Toolbar.scss";
@@ -342,6 +342,24 @@ const LayerUI = ({
       >
         {t("toolBar.library")}
       </DefaultSidebar.Trigger>
+     
+      <TerraformCodeSidebar.Trigger
+        __fallback
+        icon={TerraformIcon}
+        title={capitalizeString(t("toolBar.terraform"))}
+        onToggle={(open) => {
+          if (open) {
+            trackEvent(
+              "sidebar",
+              `${TERRAFORMCODE_SIDEBAR.name} (open)`,
+              `button (${device.isMobile ? "mobile" : "desktop"})`,
+            );
+          }
+        }}
+        tab={TERRAFORMCODE_SIDEBAR.defaultTab}
+      >
+        {t("toolBar.library")}
+      </TerraformCodeSidebar.Trigger>
       {/* ------------------------------------------------------------------ */}
 
       {appState.isLoading && <LoadingMessage delay={250} />}
