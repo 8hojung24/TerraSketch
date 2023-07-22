@@ -36,7 +36,7 @@ import { useDevice } from "../components/App";
 import { Stats } from "./Stats";
 import { actionToggleStats } from "../actions/actionToggleStats";
 import Footer from "./footer/Footer";
-import { isSidebarDockedAtom } from "./Sidebar/Sidebar";
+import { isSidebarDockedAtom, isTerraformCodeSidebarDockedAtom } from "./Sidebar/Sidebar";
 import { jotaiScope } from "../jotai";
 import { Provider, useAtomValue } from "jotai";
 import MainMenu from "./main-menu/MainMenu";
@@ -44,7 +44,7 @@ import { ActiveConfirmDialog } from "./ActiveConfirmDialog";
 import { HandButton } from "./HandButton";
 import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
-import { LibraryIcon, TerraformIcon } from "./icons";
+import { LibraryIcon, TerraformCodeIcon } from "./icons";
 import { UIAppStateContext } from "../context/ui-appState";
 import { DefaultSidebar,TerraformCodeSidebar } from "./DefaultSidebar";
 
@@ -292,6 +292,11 @@ const LayerUI = ({
                 appState.openSidebar?.name !== DEFAULT_SIDEBAR.name) && (
                 <tunnels.DefaultSidebarTriggerTunnel.Out />
               )}
+            {!appState.viewModeEnabled &&
+            (!isTerraformCodeSidebarDocked ||
+                appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
+                <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
+                )}
           </div>
         </div>
       </FixedSideContainer>
@@ -313,7 +318,23 @@ const LayerUI = ({
     );
   };
 
+  const renderTerraformCodeSidebars = () => {
+    return (
+      <TerraformCodeSidebar
+        __fallback
+        onDock={(docked) => {
+          trackEvent(
+            "toolbar",
+            `toggleDock (${docked ? "dock" : "undock"})`,
+            `(${device.isMobile ? "mobile" : "desktop"})`,
+          );
+        }}
+      />
+    );
+  };
+
   const isSidebarDocked = useAtomValue(isSidebarDockedAtom, jotaiScope);
+  const isTerraformCodeSidebarDocked = useAtomValue(isTerraformCodeSidebarDockedAtom, jotaiScope);
 
   const layerUIJSX = (
     <>
@@ -345,8 +366,9 @@ const LayerUI = ({
      
       <TerraformCodeSidebar.Trigger
         __fallback
-        icon={TerraformIcon}
-        title={capitalizeString(t("toolBar.terraform"))}
+        icon={TerraformCodeIcon}
+        title={capitalizeString(t("toolBar.terraformCode"))}
+        // title={capitalizeString(t("toolBar.library"))}
         onToggle={(open) => {
           if (open) {
             trackEvent(
@@ -358,7 +380,8 @@ const LayerUI = ({
         }}
         tab={TERRAFORMCODE_SIDEBAR.defaultTab}
       >
-        {t("toolBar.library")}
+        {t("toolBar.terraformCode")}
+        {/* {t("toolBar.library")} */}
       </TerraformCodeSidebar.Trigger>
       {/* ------------------------------------------------------------------ */}
 
@@ -405,6 +428,7 @@ const LayerUI = ({
           renderTopRightUI={renderTopRightUI}
           renderCustomStats={renderCustomStats}
           renderSidebars={renderSidebars}
+          renderTerraformCodeSidebars={renderTerraformCodeSidebars}
           device={device}
           renderWelcomeScreen={renderWelcomeScreen}
         />
@@ -421,7 +445,7 @@ const LayerUI = ({
             })}
             style={
               appState.openSidebar &&
-              isSidebarDocked &&
+              isSidebarDocked && 
               device.canDeviceFitSidebar
                 ? { width: `calc(100% - ${LIBRARY_SIDEBAR_WIDTH}px)` }
                 : {}
@@ -459,7 +483,8 @@ const LayerUI = ({
               </button>
             )}
           </div>
-          {renderSidebars()}
+          {renderSidebars()}/
+          {renderTerraformCodeSidebars()}/
         </>
       )}
     </>

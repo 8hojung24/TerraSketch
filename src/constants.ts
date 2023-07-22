@@ -292,6 +292,7 @@ export const DEFAULT_SIDEBAR = {
 } as const;
 
 export const TERRAFORMCODE_SIDEBAR_TAB="terraformCode";
+// export const TERRAFORMCODE_SIDEBAR_TAB="library";
 
 export const TERRAFORMCODE_SIDEBAR ={
   name: "terraformcode",

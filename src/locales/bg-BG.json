@@ -229,7 +229,8 @@
     "penMode": "",
     "link": "",
     "eraser": "",
-    "hand": ""
+    "hand": "",
+    "terraformcode": "테라폼코드"
   },
   "headings": {
     "canvasActions": "Действия по платното",

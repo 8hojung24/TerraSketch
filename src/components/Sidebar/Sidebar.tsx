@@ -69,6 +69,7 @@ const useOnClickOutside = (
  * Since we can only render one Sidebar at a time, we can use a simple flag.
  */
 export const isSidebarDockedAtom = atom(false);
+export const isTerraformCodeSidebarDockedAtom = atom(false);
 
 export const SidebarInner = forwardRef(
   (

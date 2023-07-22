@@ -1580,7 +1580,7 @@ export const helpIcon = createIcon(
   tablerIconProps,
 );
 
-export const TerraformIcon = createIcon(
+export const TerraformCodeIcon = createIcon(
   <g strokeWidth="1.5">
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-weight="bold">

@@ -178,7 +178,8 @@ export const TerraformCodeSidebar = Object.assign(
           {...rest}
           name="terraformcode"
           key="terraformcode"
-          className={clsx("default-sidebar", className)}
+          className={clsx("terraformcodesidebar", className)}
+          // className={clsx("default-sidebar", className)}
           docked={docked ?? appState.terraformcodeSidebarDockedPreference}
           onDock={
             // `onDock=false` disables docking.
@@ -205,13 +206,15 @@ export const TerraformCodeSidebar = Object.assign(
                     paddingRight: "1em",
                   }}
                 >
-                  {t("toolBar.library")}
+                  {t("toolBar.terraformCode")}
+                  {/* {t("toolBar.library")} */}
                 </div>
               )}
               <TerraformCodeSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
-              <LibraryMenu />
+              {/* 이곳에 TerraformCode창을 만들면 된다. -호정 */}
+              {/* <LibraryMenu /> */}
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>

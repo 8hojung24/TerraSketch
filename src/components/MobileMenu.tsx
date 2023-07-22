@@ -39,6 +39,7 @@ type MobileMenuProps = {
   ) => JSX.Element | null;
   renderCustomStats?: ExcalidrawProps["renderCustomStats"];
   renderSidebars: () => JSX.Element | null;
+  renderTerraformCodeSidebars: () => JSX.Element | null;
   device: Device;
   renderWelcomeScreen: boolean;
 };
@@ -56,6 +57,7 @@ export const MobileMenu = ({
   renderTopRightUI,
   renderCustomStats,
   renderSidebars,
+  renderTerraformCodeSidebars,
   device,
   renderWelcomeScreen,
 }: MobileMenuProps) => {
@@ -153,6 +155,7 @@ export const MobileMenu = ({
   return (
     <>
       {renderSidebars()}
+      {renderTerraformCodeSidebars()}
       {!appState.viewModeEnabled && renderToolbar()}
       {!appState.openMenu && appState.showStats && (
         <Stats

@@ -229,7 +229,8 @@
     "penMode": "펜 모드 - 터치 방지",
     "link": "선택한 도형에 대해서 링크를 추가/업데이트",
     "eraser": "지우개",
-    "hand": "손 (패닝 도구)"
+    "hand": "손 (패닝 도구)",
+    "terraformCode":"테라폼코드"
   },
   "headings": {
     "canvasActions": "캔버스 동작",

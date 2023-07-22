@@ -229,7 +229,8 @@
     "penMode": "وضع القلم - امنع اللمس",
     "link": "إضافة/تحديث الرابط للشكل المحدد",
     "eraser": "ممحاة",
-    "hand": ""
+    "hand": "",
+    "terraformcode": "테라폼코드"
   },
   "headings": {
     "canvasActions": "إجراءات اللوحة",

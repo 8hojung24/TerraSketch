@@ -246,4 +246,4 @@ export { useDevice } from "../../components/App";
 export { WelcomeScreen };
 export { LiveCollaborationTrigger };
 
-export { DefaultSidebar } from "../../components/DefaultSidebar";
+export { DefaultSidebar, TerraformCodeSidebar} from "../../components/DefaultSidebar";

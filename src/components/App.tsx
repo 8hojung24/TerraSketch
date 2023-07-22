@@ -451,6 +451,7 @@ class App extends React.Component<AppProps, AppState> {
       height: window.innerHeight,
       showHyperlinkPopup: false,
       defaultSidebarDockedPreference: false,
+      terraformcodeSidebarDockedPreference: true,
     };
 
     this.id = nanoid();

@@ -28,6 +28,7 @@ import {
   FONT_FAMILY,
   ROUNDNESS,
   DEFAULT_SIDEBAR,
+  TERRAFORMCODE_SIDEBAR,
 } from "../constants";
 import { getDefaultAppState } from "../appState";
 import { LinearElementEditor } from "../element/linearElementEditor";
@@ -444,6 +445,17 @@ const LegacyAppStateMigrations: {
         ),
     ];
   },
+  isTerraformCodeSidebarDocked: (appState, defaultAppState) => {
+    return [
+      "terraformcodeSidebarDockedPreference",
+      appState.isTerraformCodeSidebarDocked ??
+        coalesceAppStateValue(
+          "terraformcodeSidebarDockedPreference",
+          appState,
+          defaultAppState,
+        ),
+    ];
+  },
 };
 
 export const restoreAppState = (
@@ -516,7 +528,8 @@ export const restoreAppState = (
     openSidebar:
       // string (legacy)
       typeof (appState.openSidebar as any as string) === "string"
-        ? { name: DEFAULT_SIDEBAR.name }
+        // ? { name: DEFAULT_SIDEBAR.name }
+        ? { name: TERRAFORMCODE_SIDEBAR.name }
         : nextAppState.openSidebar,
   };
 };

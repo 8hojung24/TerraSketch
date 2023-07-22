@@ -59,6 +59,7 @@ export const getDefaultAppState = (): Omit<
     gridSize: null,
     isBindingEnabled: true,
     defaultSidebarDockedPreference: false,
+    terraformcodeSidebarDockedPreference: false,
     isLoading: false,
     isResizing: false,
     isRotating: false,
@@ -152,6 +153,11 @@ const APP_STATE_STORAGE_CONF = (<
   height: { browser: false, export: false, server: false },
   isBindingEnabled: { browser: false, export: false, server: false },
   defaultSidebarDockedPreference: {
+    browser: true,
+    export: false,
+    server: false,
+  },
+  terraformcodeSidebarDockedPreference:{
     browser: true,
     export: false,
     server: false,
