@@ -44,7 +44,7 @@ import { ActiveConfirmDialog } from "./ActiveConfirmDialog";
 import { HandButton } from "./HandButton";
 import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
-import { LibraryIcon, TerraformCodeIcon } from "./icons";
+import { LibraryIcon, TerraformCodeIcon, AWSIcon } from "./icons";
 import { UIAppStateContext } from "../context/ui-appState";
 import { DefaultSidebar,TerraformCodeSidebar } from "./DefaultSidebar";
 
