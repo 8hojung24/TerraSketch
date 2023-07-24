@@ -179,15 +179,11 @@ export const TerraformCodeSidebar = Object.assign(
           name="terraformcode"
           key="terraformcode"
           className={clsx("terraformcodesidebar", className)}
-          // className={clsx("default-sidebar", className)}
           docked={docked ?? appState.terraformcodeSidebarDockedPreference}
           onDock={
-            // `onDock=false` disables docking.
-            // if `docked` passed, but no onDock passed, disable manual docking.
             onDock === false || (!onDock && docked != null)
               ? undefined
-              : // compose to allow the host app to listen on default behavior
-                composeEventHandlers(onDock, (docked) => {
+              : composeEventHandlers(onDock, (docked) => {
                   setAppState({ terraformcodeSidebarDockedPreference: docked });
                 })
           }
@@ -207,14 +203,11 @@ export const TerraformCodeSidebar = Object.assign(
                   }}
                 >
                   {t("toolBar.terraformCode")}
-                  {/* {t("toolBar.library")} */}
                 </div>
               )}
               <TerraformCodeSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
-              {/* 이곳에 TerraformCode창UI 작성하면된다. -호정 */}
-              {/* <LibraryMenu /> */}
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>

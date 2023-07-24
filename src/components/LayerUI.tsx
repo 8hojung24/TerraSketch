@@ -256,7 +256,6 @@ const LayerUI = ({
                             title={t("toolBar.hand")}
                             isMobile
                           />
-
                           <ShapesSwitcher
                             appState={appState}
                             canvas={canvas}
@@ -268,6 +267,11 @@ const LayerUI = ({
                               });
                             }}
                           />
+                          {!appState.viewModeEnabled &&
+                          (!isTerraformCodeSidebarDocked ||
+                              appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
+                              <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
+                          )}
                         </Stack.Row>
                       </Island>
                     </Stack.Row>
@@ -292,11 +296,6 @@ const LayerUI = ({
                 appState.openSidebar?.name !== DEFAULT_SIDEBAR.name) && (
                 <tunnels.DefaultSidebarTriggerTunnel.Out />
               )}
-            {!appState.viewModeEnabled &&
-            (!isTerraformCodeSidebarDocked ||
-                appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
-                <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
-                )}
           </div>
         </div>
       </FixedSideContainer>
@@ -368,7 +367,6 @@ const LayerUI = ({
         __fallback
         icon={TerraformCodeIcon}
         title={capitalizeString(t("toolBar.terraformCode"))}
-        // title={capitalizeString(t("toolBar.library"))}
         onToggle={(open) => {
           if (open) {
             trackEvent(
@@ -381,9 +379,7 @@ const LayerUI = ({
         tab={TERRAFORMCODE_SIDEBAR.defaultTab}
       >
         {t("toolBar.terraformCode")}
-        {/* {t("toolBar.library")} */}
       </TerraformCodeSidebar.Trigger>
-      {/* ------------------------------------------------------------------ */}
 
       {appState.isLoading && <LoadingMessage delay={250} />}
       {appState.errorMessage && (
