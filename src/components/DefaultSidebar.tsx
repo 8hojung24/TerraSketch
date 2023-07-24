@@ -208,6 +208,7 @@ export const TerraformCodeSidebar = Object.assign(
               <TerraformCodeSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
+            {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
