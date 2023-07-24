@@ -202,7 +202,7 @@ export const TerraformCodeSidebar = Object.assign(
                     paddingRight: "1em",
                   }}
                 >
-                  {t("toolBar.terraformCode")}
+                  {/* {t("toolBar.terraformCode")} */}
                 </div>
               )}
               <TerraformCodeSidebarTabTriggersTunnel.Out />

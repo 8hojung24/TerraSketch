@@ -378,7 +378,6 @@ const LayerUI = ({
         }}
         tab={TERRAFORMCODE_SIDEBAR.defaultTab}
       >
-        {t("toolBar.terraformCode")}
       </TerraformCodeSidebar.Trigger>
 
       {appState.isLoading && <LoadingMessage delay={250} />}
