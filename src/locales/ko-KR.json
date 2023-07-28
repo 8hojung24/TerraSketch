@@ -230,6 +230,7 @@
     "link": "선택한 도형에 대해서 링크를 추가/업데이트",
     "eraser": "지우개",
     "terraformCode":"테라폼코드",
+    "AWSLibrary" : "AWS 라이브러리",
     "hand": "손 (패닝 도구)"
   },
   "headings": {

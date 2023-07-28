@@ -230,7 +230,8 @@
     "link": "إضافة/تحديث الرابط للشكل المحدد",
     "eraser": "ممحاة",
     "hand": "",
-    "terraformcode": "테라폼코드"
+    "terraformcode": "테라폼코드",
+    "AWSLibrary" : "AWS 라이브러리"
   },
   "headings": {
     "canvasActions": "إجراءات اللوحة",

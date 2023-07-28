@@ -110,35 +110,35 @@ export const SelectedShapeActions = ({
 
       {(hasStrokeStyle(appState.activeTool.type) ||
         targetElements.some((element) => hasStrokeStyle(element.type))) && (
-        <>
-          {renderAction("changeStrokeStyle")}
-          {renderAction("changeSloppiness")}
-        </>
-      )}
+          <>
+            {renderAction("changeStrokeStyle")}
+            {renderAction("changeSloppiness")}
+          </>
+        )}
 
       {(canChangeRoundness(appState.activeTool.type) ||
         targetElements.some((element) => canChangeRoundness(element.type))) && (
-        <>{renderAction("changeRoundness")}</>
-      )}
+          <>{renderAction("changeRoundness")}</>
+        )}
 
       {(hasText(appState.activeTool.type) ||
         targetElements.some((element) => hasText(element.type))) && (
-        <>
-          {renderAction("changeFontSize")}
+          <>
+            {renderAction("changeFontSize")}
 
-          {renderAction("changeFontFamily")}
+            {renderAction("changeFontFamily")}
 
-          {suppportsHorizontalAlign(targetElements) &&
-            renderAction("changeTextAlign")}
-        </>
-      )}
+            {suppportsHorizontalAlign(targetElements) &&
+              renderAction("changeTextAlign")}
+          </>
+        )}
 
       {shouldAllowVerticalAlign(targetElements) &&
         renderAction("changeVerticalAlign")}
       {(canHaveArrowheads(appState.activeTool.type) ||
         targetElements.some((element) => canHaveArrowheads(element.type))) && (
-        <>{renderAction("changeArrowhead")}</>
-      )}
+          <>{renderAction("changeArrowhead")}</>
+        )}
 
       {renderAction("changeOpacity")}
 
@@ -365,11 +365,11 @@ export const SelectedTfShapeActions = ({
         hljs.highlight(code, 'terraform').value.replace(/" "/g, "&nbsp; ")
       );
     }, [code]);
-  
+
     // const changeCode = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     //   setCode(e.target.value);
     // }, []);
-  
+
     const createMarkUpCode = useCallback(
       (code: string): { __html: string } => ({
         __html: code,
@@ -377,21 +377,22 @@ export const SelectedTfShapeActions = ({
       [code]
     );
 
-  return (
-    <div className="code-editor">
-      <textarea
-        value={code}
-        // onChange={changeCode}
-        className="code-editor__textarea"
-        autoComplete="false"
-        spellCheck="false"
-      />
-      <pre className="code-editor__present">
-        <code
-          dangerouslySetInnerHTML={createMarkUpCode(highlightedHTML)}
-        ></code>
-      </pre>
-    </div>
-  );
+    return (
+      <div className="code-editor">
+        <textarea
+          value={code}
+          // onChange={changeCode}
+          className="code-editor__textarea"
+          autoComplete="false"
+          spellCheck="false"
+        />
+        <pre className="code-editor__present">
+          <code
+            dangerouslySetInnerHTML={createMarkUpCode(highlightedHTML)}
+          ></code>
+        </pre>
+      </div>
+    );
 
-}};
+  }
+};
