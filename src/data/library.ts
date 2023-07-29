@@ -352,14 +352,16 @@ export const distributeLibraryItemsOnSquareGrid = (
 };
 
 export const parseLibraryTokensFromUrl = () => {
-  const libraryUrl =
+  const libraryUrl = "https://libraries.excalidraw.com/libraries/childishgirl/aws-architecture-icons.excalidrawlib";
+  //바로 라이브러리에 AWS 아이콘이 추가되도록 함
     // current
-    new URLSearchParams(window.location.hash.slice(1)).get(
+    /*new URLSearchParams(window.location.hash.slice(1)).get(
       URL_HASH_KEYS.addLibrary,
     ) ||
     // legacy, kept for compat reasons
     new URLSearchParams(window.location.search).get(URL_QUERY_KEYS.addLibrary);
-  const idToken = libraryUrl
+    */
+    const idToken = libraryUrl
     ? new URLSearchParams(window.location.hash.slice(1)).get("token")
     : null;
 
@@ -373,7 +375,7 @@ export const useHandleLibrary = ({
   excalidrawAPI: ExcalidrawImperativeAPI | null;
   getInitialLibraryItems?: () => LibraryItemsSource;
 }) => {
-  const getInitialLibraryRef = useRef(getInitialLibraryItems);
+  //const getInitialLibraryRef = useRef(getInitialLibraryItems);
 
   useEffect(() => {
     if (!excalidrawAPI) {
@@ -401,18 +403,18 @@ export const useHandleLibrary = ({
 
       // wait for the tab to be focused before continuing in case we'll prompt
       // for confirmation
-      await (shouldPrompt && document.hidden
+      /*await (shouldPrompt && document.hidden
         ? new Promise<void>((resolve) => {
             window.addEventListener("focus", () => resolve(), {
               once: true,
             });
           })
-        : null);
+        : null);*/
 
       try {
         await excalidrawAPI.updateLibrary({
           libraryItems: libraryPromise,
-          prompt: shouldPrompt,
+          prompt: false, //alert 창 뜨지 않게 함(false)
           merge: true,
           defaultStatus: "published",
           openLibraryMenu: true,
@@ -448,11 +450,11 @@ export const useHandleLibrary = ({
 
     // -------------------------------------------------------------------------
     // ------ init load --------------------------------------------------------
-    if (getInitialLibraryRef.current) {
+    /*if (getInitialLibraryRef.current) {
       excalidrawAPI.updateLibrary({
         libraryItems: getInitialLibraryRef.current(),
       });
-    }
+    }*/
 
     const libraryUrlTokens = parseLibraryTokensFromUrl();
 
