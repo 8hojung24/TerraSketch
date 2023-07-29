@@ -16,7 +16,7 @@ import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
 import { LibraryDropdownMenu } from "./LibraryMenuHeaderContent";
 import LibraryMenuSection from "./LibraryMenuSection";
 
-import "./LibraryMenuItems.scss";
+import "./AWSLibraryMenuItems.scss";
 
 export default function AWSLibraryMenuItems({
     isLoading,
@@ -166,13 +166,15 @@ export default function AWSLibraryMenuItems({
                     : { borderBottom: 0 }
             }
         >
+            {/*
             {!isLibraryEmpty && (
                 <LibraryDropdownMenu
                     selectedItems={selectedItems}
                     onSelectItems={setSelectedItems}
                     className="library-menu-dropdown-container--in-heading"
                 />
-            )}
+            )}*/}
+
             <Stack.Col
                 className="library-menu-items-container__items"
                 align="start"
@@ -183,11 +185,11 @@ export default function AWSLibraryMenuItems({
                 }}
             >
                 <>
-                    {!isLibraryEmpty && (
+                    {/*{!isLibraryEmpty && (
                         <div className="library-menu-items-container__header">
                             {t("labels.personalLib")}
                         </div>
-                    )}
+                    )}*/}
                     {isLoading && (
                         <div
                             style={{
@@ -200,6 +202,7 @@ export default function AWSLibraryMenuItems({
                             <Spinner />
                         </div>
                     )}
+                    {/*
                     {!pendingElements.length && !unpublishedItems.length ? (
                         <div className="library-menu-items__no-items">
                             <div className="library-menu-items__no-items__label">
@@ -225,7 +228,7 @@ export default function AWSLibraryMenuItems({
                             onClick={onItemClick}
                             isItemSelected={isItemSelected}
                         />
-                    )}
+                    )}*/}
                 </>
 
                 <>
@@ -233,7 +236,7 @@ export default function AWSLibraryMenuItems({
                         pendingElements.length > 0 ||
                         unpublishedItems.length > 0) && (
                             <div className="library-menu-items-container__header library-menu-items-container__header--excal">
-                                {t("labels.excalidrawLib")}
+                                AWS Architecture Icons
                             </div>
                         )}
                     {publishedItems.length > 0 ? (

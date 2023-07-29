@@ -25,7 +25,7 @@ import {
 import { getSelectedElements } from "../scene";
 import { useUIAppState } from "../context/ui-appState";
 
-import "./LibraryMenu.scss";
+import "./AWSLibraryMenu.scss";
 import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
 
 export const isLibraryMenuOpenAtom = atom(false);
@@ -113,6 +113,7 @@ export const LibraryMenuContent = ({
                 libraryReturnUrl={libraryReturnUrl}
                 theme={appState.theme}
             />
+            {/*
             {showBtn && (
                 <LibraryMenuControlButtons
                     className="library-menu-control-buttons--at-bottom"
@@ -122,6 +123,7 @@ export const LibraryMenuContent = ({
                     theme={appState.theme}
                 />
             )}
+            */}
         </LibraryMenuWrapper>
     );
 };
