@@ -231,7 +231,7 @@
     "eraser": "ঝাড়ন",
     "hand": "",
     "terraformcode": "테라폼코드",
-    "AWSLibrary" : "AWS 라이브러리"
+    "awsLib" : "AWS 라이브러리"
   },
   "headings": {
     "canvasActions": "ক্যানভাস কার্যকলাপ",

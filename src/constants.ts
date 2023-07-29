@@ -272,6 +272,8 @@ export const DEFAULT_ELEMENT_PROPS: {
   opacity: ExcalidrawElement["opacity"];
   locked: ExcalidrawElement["locked"];
   terraform: ExcalidrawElement["terraform"];
+  aws: ExcalidrawElement["aws"];
+
 } = {
   strokeColor: COLOR_PALETTE.black,
   backgroundColor: COLOR_PALETTE.transparent,
@@ -281,7 +283,9 @@ export const DEFAULT_ELEMENT_PROPS: {
   roughness: 1,
   opacity: 100,
   locked: false,
-  terraform : null
+  terraform : null,
+  aws : null
+
 };
 
 export const LIBRARY_SIDEBAR_TAB = "library";
@@ -297,4 +301,12 @@ export const TERRAFORMCODE_SIDEBAR_TAB="terraformCode";
 export const TERRAFORMCODE_SIDEBAR ={
   name: "terraformcode",
   defaultTab : TERRAFORMCODE_SIDEBAR_TAB,
+} as const;
+
+export const AWSLIB_SIDEBAR_TAB="awsLib";
+// export const AWSLIB_SIDEBAR_TAB="library";
+
+export const AWSLIB_SIDEBAR ={
+  name: "awslib",
+  defaultTab : AWSLIB_SIDEBAR_TAB,
 } as const;

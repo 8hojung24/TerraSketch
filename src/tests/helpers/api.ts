@@ -144,6 +144,7 @@ export class API {
       | "link"
       | "updated"
       | "terraform"
+      | "aws"
     > = {
       x,
       y,
@@ -180,6 +181,7 @@ export class API {
           height,
           ...base,
           terraform: null,
+          aws: null,
         });
         break;
       case "text":
@@ -194,6 +196,7 @@ export class API {
           verticalAlign: rest.verticalAlign ?? DEFAULT_VERTICAL_ALIGN,
           containerId: rest.containerId ?? undefined,
           terraform: null,
+          aws: null,
         });
         element.width = width;
         element.height = height;
@@ -204,6 +207,7 @@ export class API {
           simulatePressure: true,
           ...base,
           terraform: null,
+          aws: null,
         });
         break;
       case "arrow":
@@ -220,6 +224,7 @@ export class API {
             [100, 100],
           ],
           terraform: null,
+          aws: null,
         });
         break;
       case "image":
@@ -232,6 +237,7 @@ export class API {
           status: rest.status || "saved",
           scale: rest.scale || [1, 1],
           terraform: null,
+          aws: null,
         });
         break;
     }

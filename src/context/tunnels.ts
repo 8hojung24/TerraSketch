@@ -14,6 +14,8 @@ type TunnelsContextValue = {
   DefaultSidebarTabTriggersTunnel: Tunnel;
   TerraformCodeSidebarTriggerTunnel: Tunnel;
   TerraformCodeSidebarTabTriggersTunnel: Tunnel;
+  AwsLibSidebarTriggerTunnel: Tunnel;
+  AwsLibSidebarTabTriggersTunnel: Tunnel;
   jotaiScope: symbol;
 };
 
@@ -34,6 +36,8 @@ export const useInitializeTunnels = () => {
       DefaultSidebarTabTriggersTunnel: tunnel(),
       TerraformCodeSidebarTriggerTunnel: tunnel(),
       TerraformCodeSidebarTabTriggersTunnel: tunnel(),
+      AwsLibSidebarTriggerTunnel: tunnel(),
+      AwsLibSidebarTabTriggersTunnel: tunnel(),
       jotaiScope: Symbol(),
     };
   }, []);

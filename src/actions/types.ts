@@ -117,7 +117,9 @@ export type ActionName =
   | "toggleEraserTool"
   | "toggleHandTool"
   | "wrapTextInContainer"
-  | "insertTerraform";
+  | "insertTerraform"
+  | "insertAws";
+
 
 export type PanelComponentProps = {
   elements: readonly ExcalidrawElement[];

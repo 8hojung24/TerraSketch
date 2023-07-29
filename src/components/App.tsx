@@ -452,6 +452,7 @@ class App extends React.Component<AppProps, AppState> {
       showHyperlinkPopup: false,
       defaultSidebarDockedPreference: false,
       terraformcodeSidebarDockedPreference: true,
+      awslibSidebarDockedPreference: true,
     };
 
     this.id = nanoid();
@@ -1790,6 +1791,7 @@ class App extends React.Component<AppProps, AppState> {
             text,
             lineHeight,
             terraform : null,
+            aws : null,
           });
           acc.push(element);
           currentY += element.height + LINE_GAP;
@@ -2792,7 +2794,7 @@ class App extends React.Component<AppProps, AppState> {
           lineHeight,
           angle: container?.angle ?? 0,
           terraform : null,
-
+          aws : null,
         });
 
     if (!existingTextElement && shouldBindToContainer && container) {
@@ -4336,6 +4338,7 @@ class App extends React.Component<AppProps, AppState> {
       simulatePressure: event.pressure === 0.5,
       locked: false,
       terraform : null,
+      aws : null,
     });
 
     this.setState((prevState) => ({
@@ -4393,6 +4396,7 @@ class App extends React.Component<AppProps, AppState> {
       opacity: this.state.currentItemOpacity,
       locked: false,
       terraform : null,
+      aws : null,
     });
 
     return element;
@@ -4485,6 +4489,7 @@ class App extends React.Component<AppProps, AppState> {
         endArrowhead,
         locked: false,
         terraform : null,
+        aws : null,
       });
       this.setState((prevState) => ({
         selectedElementIds: {
@@ -4542,6 +4547,7 @@ class App extends React.Component<AppProps, AppState> {
           : null,
       locked: false,
       terraform : null,
+      aws : null,
     });
 
     if (element.type === "selection") {

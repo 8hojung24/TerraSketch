@@ -70,6 +70,7 @@ const useOnClickOutside = (
  */
 export const isSidebarDockedAtom = atom(false);
 export const isTerraformCodeSidebarDockedAtom = atom(false);
+export const isAwsLibSidebarDockedAtom = atom(false);
 
 export const SidebarInner = forwardRef(
   (

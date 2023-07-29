@@ -175,6 +175,8 @@ export type AppState = {
    */
   defaultSidebarDockedPreference: boolean;
   terraformcodeSidebarDockedPreference: boolean;
+  awslibSidebarDockedPreference: boolean;
+
 
   lastPointerDownWith: PointerType;
   selectedElementIds: { [id: string]: boolean };
@@ -214,6 +216,8 @@ export type AppState = {
   showHyperlinkPopup: false | "info" | "editor";
   selectedLinearElement: LinearElementEditor | null;
   currentItemTerraform:string | null ;
+  currentItemAws:string | null ;
+
 };
 
 export type UIAppState = Omit<

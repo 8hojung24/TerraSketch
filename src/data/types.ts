@@ -28,6 +28,7 @@ export type LegacyAppState = {
   /** @deprecated #6213 TODO remove 23-06-01 */
   isSidebarDocked: [boolean, "defaultSidebarDockedPreference"];
   isTerraformCodeSidebarDocked: [boolean, "terraformcodeSidebarDockedPreference"];
+  isAwsLibSidebarDocked: [boolean, "awslibSidebarDockedPreference"];
 };
 
 export interface ImportedDataState {

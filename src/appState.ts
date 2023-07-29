@@ -60,6 +60,7 @@ export const getDefaultAppState = (): Omit<
     isBindingEnabled: true,
     defaultSidebarDockedPreference: false,
     terraformcodeSidebarDockedPreference: false,
+    awslibSidebarDockedPreference: false,
     isLoading: false,
     isResizing: false,
     isRotating: false,
@@ -95,6 +96,7 @@ export const getDefaultAppState = (): Omit<
     showHyperlinkPopup: false,
     selectedLinearElement: null,
     currentItemTerraform: DEFAULT_ELEMENT_PROPS.terraform,
+    currentItemAws: DEFAULT_ELEMENT_PROPS.aws,
   };
 };
 
@@ -162,6 +164,11 @@ const APP_STATE_STORAGE_CONF = (<
     export: false,
     server: false,
   },
+  awslibSidebarDockedPreference:{
+    browser: true,
+    export: false,
+    server: false,
+  },
   isLoading: { browser: false, export: false, server: false },
   isResizing: { browser: false, export: false, server: false },
   isRotating: { browser: false, export: false, server: false },
@@ -198,6 +205,7 @@ const APP_STATE_STORAGE_CONF = (<
   showHyperlinkPopup: { browser: false, export: false, server: false },
   selectedLinearElement: { browser: true, export: false, server: false },
   currentItemTerraform: {browser: true, export: false, server: false},
+  currentItemAws: {browser: true, export: false, server: false},
 });
 
 const _clearAppStateForStorage = <

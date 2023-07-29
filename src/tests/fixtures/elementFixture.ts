@@ -25,6 +25,7 @@ const elementBase: Omit<ExcalidrawElement, "type"> = {
   link: null,
   locked: false,
   terraform: null,
+  aws: null,
 };
 
 export const rectangleFixture: ExcalidrawElement = {

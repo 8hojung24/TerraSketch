@@ -146,6 +146,7 @@ const createLinearElementWithCurveInsideMinMaxPoints = (
     startArrowhead: null,
     endArrowhead: null,
     terraform: null,
+    aws: null,
   });
 };
 

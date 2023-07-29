@@ -119,6 +119,7 @@ const _newElementBase = <T extends ExcalidrawElement>(
     link,
     locked,
     terraform : null,
+    aws : null,
   };
   return element;
 };

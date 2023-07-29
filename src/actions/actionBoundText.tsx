@@ -250,6 +250,7 @@ export const actionWrapTextInContainer = register({
           ),
           groupIds: textElement.groupIds,
           terraform: null,
+          aws: "null",
         });
 
         // update bindings

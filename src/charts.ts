@@ -209,6 +209,7 @@ const chartXLabels = (
         textAlign: "center",
         verticalAlign: "top",
         terraform: "null",
+        aws: "null",
       });
     }) || []
   );
@@ -230,6 +231,7 @@ const chartYLabels = (
     text: "0",
     textAlign: "right",
     terraform: "null",
+    aws: "null",
   });
 
   const maxYLabel = newTextElement({
@@ -241,6 +243,7 @@ const chartYLabels = (
     text: Math.max(...spreadsheet.values).toLocaleString(),
     textAlign: "right",
     terraform: "null",
+    aws: "null",
   });
 
   return [minYLabel, maxYLabel];
@@ -269,6 +272,7 @@ const chartLines = (
       [chartWidth, 0],
     ],
     terraform: "null",
+    aws: "null",
   });
 
   const yLine = newLinearElement({
@@ -286,6 +290,7 @@ const chartLines = (
       [0, -chartHeight],
     ],
     terraform: "null",
+    aws: "null",
   });
 
   const maxLine = newLinearElement({
@@ -305,6 +310,7 @@ const chartLines = (
       [chartWidth, 0],
     ],
     terraform: "null",
+    aws: "null",
   });
 
   return [xLine, yLine, maxLine];
@@ -332,6 +338,7 @@ const chartBaseElements = (
         roundness: null,
         textAlign: "center",
         terraform: "null",
+        aws: "null",
       })
     : null;
 
@@ -349,6 +356,7 @@ const chartBaseElements = (
         fillStyle: "solid",
         opacity: 6,
         terraform: "null",
+        aws: "null",
       })
     : null;
 
@@ -382,6 +390,7 @@ const chartTypeBar = (
       width: BAR_WIDTH,
       height: barHeight,
       terraform: "null",
+      aws: "null",
     });
   });
 
@@ -435,6 +444,7 @@ const chartTypeLine = (
     strokeWidth: 2,
     points: points as any,
     terraform: "null",
+    aws: "null",
   });
 
   const dots = spreadsheet.values.map((value, index) => {
@@ -452,6 +462,7 @@ const chartTypeLine = (
       width: BAR_GAP,
       height: BAR_GAP,
       terraform: "null",
+      aws: "null",
     });
   });
 
@@ -475,6 +486,7 @@ const chartTypeLine = (
         [0, cy],
       ],
       terraform: "null",
+      aws: "null",
     });
   });
 

@@ -1108,3 +1108,23 @@ export const actionTerraform = register({
     };
   },
 });
+
+export const actionAws = register({
+  name: "insertAws",
+  trackEvent: false,
+  perform: (elements, appState, value) => {
+    return {
+      elements: changeProperty(
+        elements,
+        appState,
+        (el) =>
+          newElementWith(el, {
+            aws: value,
+          }),
+        true,
+      ),
+      appState: { ...appState, currentItemAws: value },
+      commitToHistory: true,
+    };
+  },
+});

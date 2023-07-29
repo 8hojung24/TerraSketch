@@ -29,6 +29,7 @@ import {
   ROUNDNESS,
   DEFAULT_SIDEBAR,
   TERRAFORMCODE_SIDEBAR,
+  AWSLIB_SIDEBAR,
 } from "../constants";
 import { getDefaultAppState } from "../appState";
 import { LinearElementEditor } from "../element/linearElementEditor";
@@ -144,6 +145,7 @@ const restoreElementWithProperties = <
     link: element.link ?? null,
     locked: element.locked ?? false,
     terraform: element.terraform ?? null,
+    aws: element.aws ?? null,
   };
 
   if ("customData" in element) {
@@ -456,6 +458,17 @@ const LegacyAppStateMigrations: {
         ),
     ];
   },
+  isAwsLibSidebarDocked: (appState, defaultAppState) => {
+    return [
+      "awslibSidebarDockedPreference",
+      appState.isAwsLibSidebarDocked ??
+        coalesceAppStateValue(
+          "awslibSidebarDockedPreference",
+          appState,
+          defaultAppState,
+        ),
+    ];
+  },
 };
 
 export const restoreAppState = (
@@ -529,7 +542,7 @@ export const restoreAppState = (
       // string (legacy)
       typeof (appState.openSidebar as any as string) === "string"
         // ? { name: DEFAULT_SIDEBAR.name }
-        ? { name: TERRAFORMCODE_SIDEBAR.name }
+        ? { name: TERRAFORMCODE_SIDEBAR.name || AWSLIB_SIDEBAR.name}
         : nextAppState.openSidebar,
   };
 };

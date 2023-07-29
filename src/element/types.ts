@@ -66,6 +66,7 @@ type _ExcalidrawElementBase = Readonly<{
   locked: boolean;
   customData?: Record<string, any>;
   terraform : string | null;
+  aws : string | null;
 }>;
 
 export type ExcalidrawSelectionElement = _ExcalidrawElementBase & {

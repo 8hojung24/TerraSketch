@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import { ActionManager } from "../actions/manager";
-import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB } from "../constants";
+import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
 import { isTextElement, showSelectedShapeActions } from "../element";
 import { NonDeletedExcalidrawElement } from "../element/types";
 import { Language, t } from "../i18n";
@@ -36,7 +36,7 @@ import { useDevice } from "../components/App";
 import { Stats } from "./Stats";
 import { actionToggleStats } from "../actions/actionToggleStats";
 import Footer from "./footer/Footer";
-import { isSidebarDockedAtom, isTerraformCodeSidebarDockedAtom } from "./Sidebar/Sidebar";
+import { isSidebarDockedAtom, isTerraformCodeSidebarDockedAtom, isAwsLibSidebarDockedAtom } from "./Sidebar/Sidebar";
 import { jotaiScope } from "../jotai";
 import { Provider, useAtomValue } from "jotai";
 import MainMenu from "./main-menu/MainMenu";
@@ -46,7 +46,7 @@ import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
 import { LibraryIcon, TerraformCodeIcon, AWSIcon } from "./icons";
 import { UIAppStateContext } from "../context/ui-appState";
-import { DefaultSidebar,TerraformCodeSidebar } from "./DefaultSidebar";
+import { DefaultSidebar,TerraformCodeSidebar, AwsLibSidebar } from "./DefaultSidebar";
 
 import "./LayerUI.scss";
 import "./Toolbar.scss";
@@ -272,6 +272,12 @@ const LayerUI = ({
                               appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
                               <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
                           )}
+                          {/*여길 이렇게 추가하는게 맞는지 모르겠다 */}
+                          {!appState.viewModeEnabled &&
+                          (!isAwsLibSidebarDocked ||
+                              appState.openSidebar?.name !== AWSLIB_SIDEBAR.name) && (
+                              <tunnels.AwsLibSidebarTriggerTunnel.Out />
+                          )}
                         </Stack.Row>
                       </Island>
                     </Stack.Row>
@@ -332,8 +338,25 @@ const LayerUI = ({
     );
   };
 
+  const renderAwsLibSidebars = () => {
+    return (
+      <AwsLibSidebar
+        __fallback
+        onDock={(docked) => {
+          trackEvent(
+            "toolbar",
+            `toggleDock (${docked ? "dock" : "undock"})`,
+            `(${device.isMobile ? "mobile" : "desktop"})`,
+          );
+        }}
+      />
+    );
+  };
+
   const isSidebarDocked = useAtomValue(isSidebarDockedAtom, jotaiScope);
   const isTerraformCodeSidebarDocked = useAtomValue(isTerraformCodeSidebarDockedAtom, jotaiScope);
+  const isAwsLibSidebarDocked = useAtomValue(isAwsLibSidebarDockedAtom, jotaiScope);
+
 
   const layerUIJSX = (
     <>
@@ -380,6 +403,23 @@ const LayerUI = ({
       >
       </TerraformCodeSidebar.Trigger>
 
+      <AwsLibSidebar.Trigger
+        __fallback
+        icon={AWSIcon}
+        title={capitalizeString(t("toolBar.awsLib"))}
+        onToggle={(open) => {
+          if (open) {
+            trackEvent(
+              "sidebar",
+              `${AWSLIB_SIDEBAR.name} (open)`,
+              `button (${device.isMobile ? "mobile" : "desktop"})`,
+            );
+          }
+        }}
+        tab={AWSLIB_SIDEBAR.defaultTab}
+      >
+      </AwsLibSidebar.Trigger>
+
       {appState.isLoading && <LoadingMessage delay={250} />}
       {appState.errorMessage && (
         <ErrorDialog onClose={() => setAppState({ errorMessage: null })}>
@@ -424,6 +464,7 @@ const LayerUI = ({
           renderCustomStats={renderCustomStats}
           renderSidebars={renderSidebars}
           renderTerraformCodeSidebars={renderTerraformCodeSidebars}
+          renderAwsLibSidebars={renderAwsLibSidebars}
           device={device}
           renderWelcomeScreen={renderWelcomeScreen}
         />
@@ -478,8 +519,10 @@ const LayerUI = ({
               </button>
             )}
           </div>
-          {renderSidebars()}/
-          {renderTerraformCodeSidebars()}/
+          {renderSidebars()}
+          {renderTerraformCodeSidebars()}
+          {renderAwsLibSidebars()}
+
         </>
       )}
     </>

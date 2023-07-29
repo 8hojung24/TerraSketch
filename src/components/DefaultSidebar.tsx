@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB } from "../constants";
+import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
 import { useTunnels } from "../context/tunnels";
 import { useUIAppState } from "../context/ui-appState";
 import { t } from "../i18n";
@@ -219,5 +219,111 @@ export const TerraformCodeSidebar = Object.assign(
   {
     Trigger: TerraformCodeSidebarTrigger,
     TabTriggers: TerraformCodeTabTriggers,
+  },
+);
+
+
+//여기서부터 AWS SIDEBAR 개발
+
+const AwsLibSidebarTrigger = withInternalFallback(
+  "AwsLibSidebarTrigger",
+  (
+    props: Omit<SidebarTriggerProps, "name"> &
+      React.HTMLAttributes<HTMLDivElement>,
+  ) => {
+    const { AwsLibSidebarTriggerTunnel } = useTunnels();
+    return (
+      <AwsLibSidebarTriggerTunnel.In>
+        <Sidebar.Trigger
+          {...props}
+          className="default-sidebar-trigger"
+          name={AWSLIB_SIDEBAR.name}
+        />
+      </AwsLibSidebarTriggerTunnel.In>
+    );
+  },
+);
+AwsLibSidebarTrigger.displayName = "AwsLibSidebarTrigger";
+
+const AwsLibTabTriggers = ({
+  children,
+  ...rest
+}: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) => {
+  const { AwsLibSidebarTabTriggersTunnel } = useTunnels();
+  return (
+    <AwsLibSidebarTabTriggersTunnel.In>
+      <Sidebar.TabTriggers {...rest}>{children}</Sidebar.TabTriggers>
+    </AwsLibSidebarTabTriggersTunnel.In>
+  );
+};
+AwsLibTabTriggers.displayName = "AwsLibTabTriggers";
+
+export const AwsLibSidebar = Object.assign(
+  withInternalFallback(
+    "AwsLibSidebar",
+    ({
+      children,
+      className,
+      onDock,
+      docked,
+      ...rest
+    }: Merge<
+      MarkOptional<Omit<SidebarProps, "name">, "children">,
+      {
+        /** pass `false` to disable docking */
+        onDock?: SidebarProps["onDock"] | false;
+      }
+    >) => {
+      const appState = useUIAppState();
+      const setAppState = useExcalidrawSetAppState();
+
+      const { AwsLibSidebarTabTriggersTunnel } = useTunnels();
+
+      return (
+        <Sidebar
+          {...rest}
+          name="awslib"
+          key="awslib"
+          className={clsx("awslibsidebar", className)}
+          docked={docked ?? appState.awslibSidebarDockedPreference}
+          onDock={
+            onDock === false || (!onDock && docked != null)
+              ? undefined
+              : composeEventHandlers(onDock, (docked) => {
+                  setAppState({ awslibSidebarDockedPreference: docked });
+                })
+          }
+        >
+          <Sidebar.Tabs>
+            <Sidebar.Header>
+              {rest.__fallback && (
+                <div
+                  style={{
+                    color: "var(--color-primary)",
+                    fontSize: "1.2em",
+                    fontWeight: "bold",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    paddingRight: "1em",
+                  }}
+                >
+                  {t("toolBar.awsLib")}
+                </div>
+              )}
+              <AwsLibSidebarTabTriggersTunnel.Out />
+            </Sidebar.Header>
+            <Sidebar.Tab tab={AWSLIB_SIDEBAR_TAB}>
+            {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
+            </Sidebar.Tab>
+            {children}
+          </Sidebar.Tabs>
+        </Sidebar>
+      );
+    },
+  ),
+  {
+    Trigger: AwsLibSidebarTrigger,
+    TabTriggers: AwsLibTabTriggers,
   },
 );
