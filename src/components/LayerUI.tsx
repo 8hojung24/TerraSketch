@@ -272,7 +272,7 @@ const LayerUI = ({
                               appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
                               <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
                           )}
-                          {/*여길 이렇게 추가하는게 맞는지 모르겠다 */}
+                          {/*여길 이렇게 추가하는게 맞는지 모르겠다 => 맞다 */}
                           {!appState.viewModeEnabled &&
                           (!isAwsLibSidebarDocked ||
                               appState.openSidebar?.name !== AWSLIB_SIDEBAR.name) && (

@@ -1,6 +1,3 @@
-//230728
-//import { awsLibraryItems } from "../.github/assets/aws-architecture-icons.excalidrawlib"; 
-
 import React, { useCallback, useState } from "react";
 import { serializeLibraryAsJSON } from "../data/json";
 import { t } from "../i18n";
