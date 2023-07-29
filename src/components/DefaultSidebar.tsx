@@ -8,7 +8,7 @@ import { composeEventHandlers } from "../utils";
 import { useExcalidrawSetAppState } from "./App";
 import { withInternalFallback } from "./hoc/withInternalFallback";
 import { LibraryMenu } from "./LibraryMenu";
-//import { AWSLibraryMenu } from "./AWSLibraryMenu"; //AWSLibraryMenu 파일 생성 필요
+import { AWSLibraryMenu } from "./AWSLibraryMenu"; //AWSLibraryMenu 파일 생성 필요
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
 import { Sidebar } from "./Sidebar/Sidebar";
 
@@ -315,7 +315,7 @@ export const AwsLibSidebar = Object.assign(
               <AwsLibSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={AWSLIB_SIDEBAR_TAB}>
-            {/* <AWSLibraryMenu/> */}
+            <AWSLibraryMenu/> 
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
