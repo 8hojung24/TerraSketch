@@ -36,7 +36,8 @@ import { useDevice } from "../components/App";
 import { Stats } from "./Stats";
 import { actionToggleStats } from "../actions/actionToggleStats";
 import Footer from "./footer/Footer";
-import { isSidebarDockedAtom, isTerraformCodeSidebarDockedAtom, isAwsLibSidebarDockedAtom } from "./Sidebar/Sidebar";
+import { isSidebarDockedAtom, isTerraformCodeSidebarDockedAtom } from "./Sidebar/Sidebar";
+import { isAWSLibSidebarDockedAtom } from "./Sidebar/AWSSidebar";
 import { jotaiScope } from "../jotai";
 import { Provider, useAtomValue } from "jotai";
 import MainMenu from "./main-menu/MainMenu";
@@ -46,7 +47,8 @@ import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
 import { LibraryIcon, TerraformCodeIcon, AWSIcon } from "./icons";
 import { UIAppStateContext } from "../context/ui-appState";
-import { DefaultSidebar,TerraformCodeSidebar, AwsLibSidebar } from "./DefaultSidebar";
+import { DefaultSidebar,TerraformCodeSidebar } from "./DefaultSidebar";
+import { AwsLibSidebar } from "./AWSDefaultSidebar";
 
 import "./LayerUI.scss";
 import "./Toolbar.scss";
@@ -355,7 +357,7 @@ const LayerUI = ({
 
   const isSidebarDocked = useAtomValue(isSidebarDockedAtom, jotaiScope);
   const isTerraformCodeSidebarDocked = useAtomValue(isTerraformCodeSidebarDockedAtom, jotaiScope);
-  const isAwsLibSidebarDocked = useAtomValue(isAwsLibSidebarDockedAtom, jotaiScope);
+  const isAwsLibSidebarDocked = useAtomValue(isAWSLibSidebarDockedAtom, jotaiScope);
 
 
   const layerUIJSX = (

@@ -68,11 +68,9 @@ const useOnClickOutside = (
  *
  * Since we can only render one Sidebar at a time, we can use a simple flag.
  */
-export const isSidebarDockedAtom = atom(false);
-export const isTerraformCodeSidebarDockedAtom = atom(false);
-export const isAwsLibSidebarDockedAtom = atom(false);
+export const isAWSLibSidebarDockedAtom = atom(false);
 
-export const SidebarInner = forwardRef(
+export const AWSSidebarInner = forwardRef(
     (
         {
             name,
@@ -86,20 +84,20 @@ export const SidebarInner = forwardRef(
     ) => {
         if (process.env.NODE_ENV === "development" && onDock && docked == null) {
             console.warn(
-                "Sidebar: `docked` must be set when `onDock` is supplied for the sidebar to be user-dockable. To hide this message, either pass `docked` or remove `onDock`",
+                "AWSSidebar: `docked` must be set when `onDock` is supplied for the sidebar to be user-dockable. To hide this message, either pass `docked` or remove `onDock`",
             );
         }
 
         const setAppState = useExcalidrawSetAppState();
 
-        const setIsSidebarDockedAtom = useSetAtom(isSidebarDockedAtom, jotaiScope);
+        const setisAWSLibSidebarDockedAtom = useSetAtom(isAWSLibSidebarDockedAtom, jotaiScope);
 
         useLayoutEffect(() => {
-            setIsSidebarDockedAtom(!!docked);
+            setisAWSLibSidebarDockedAtom(!!docked);
             return () => {
-                setIsSidebarDockedAtom(false);
+                setisAWSLibSidebarDockedAtom(false);
             };
-        }, [setIsSidebarDockedAtom, docked]);
+        }, [setisAWSLibSidebarDockedAtom, docked]);
 
         const headerPropsRef = useRef<SidebarPropsContextValue>(
             {} as SidebarPropsContextValue,
@@ -110,7 +108,7 @@ export const SidebarInner = forwardRef(
         headerPropsRef.current.onDock = (isDocked) => onDock?.(isDocked);
         // renew the ref object if the following props change since we want to
         // rerender. We can't pass down as component props manually because
-        // the <Sidebar.Header/> can be rendered upstream.
+        // the <AWSSidebar.Header/> can be rendered upstream.
         headerPropsRef.current = updateObject(headerPropsRef.current, {
             docked,
             // explicit prop to rerender on update
@@ -170,7 +168,7 @@ export const SidebarInner = forwardRef(
         return (
             <Island
                 {...rest}
-                className={clsx("sidebar", { "sidebar--docked": docked }, className)}
+                className={clsx("awssidebar", { "sidebar--docked": docked }, className)}
                 ref={islandRef}
             >
                 <SidebarPropsContext.Provider value={headerPropsRef.current}>
@@ -180,7 +178,7 @@ export const SidebarInner = forwardRef(
         );
     },
 );
-SidebarInner.displayName = "SidebarInner";
+AWSSidebarInner.displayName = "AWSSidebarInner";
 
 export const AWSSidebar = Object.assign(
     forwardRef((props: SidebarProps, ref: React.ForwardedRef<HTMLDivElement>) => {
@@ -234,7 +232,7 @@ export const AWSSidebar = Object.assign(
             return null;
         }
 
-        return <SidebarInner {...props} ref={ref} key={props.name} />;
+        return <AWSSidebarInner {...props} ref={ref} key={props.name} />;
     }),
     {
         Header: SidebarHeader,
