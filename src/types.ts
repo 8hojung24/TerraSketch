@@ -197,6 +197,7 @@ export type AppState = {
   height: number;
   offsetTop: number;
   offsetLeft: number;
+  terraform: string|null;
 
   fileHandle: FileSystemHandle | null;
   collaborators: Map<string, Collaborator>;
