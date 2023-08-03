@@ -10,6 +10,8 @@ import { withInternalFallback } from "./hoc/withInternalFallback";
 import { LibraryMenu } from "./LibraryMenu";
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
 import { Sidebar } from "./Sidebar/Sidebar";
+import MonacoEditor  from './MonacoEditor';
+import { AWSLibraryMenu } from "./AWSLibraryMenu";
 
 const DefaultSidebarTrigger = withInternalFallback(
   "DefaultSidebarTrigger",
