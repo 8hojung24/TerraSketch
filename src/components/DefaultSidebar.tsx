@@ -11,6 +11,8 @@ import { LibraryMenu } from "./LibraryMenu";
 import { AWSLibraryMenu } from "./AWSLibraryMenu"; //AWSLibraryMenu 파일 생성 필요
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
 import { Sidebar } from "./Sidebar/Sidebar";
+import MonacoEditor from './MonacoEditor'; //230802
+import React, { useRef, useState } from 'react'; //230802
 
 const DefaultSidebarTrigger = withInternalFallback(
   "DefaultSidebarTrigger",
@@ -79,9 +81,9 @@ export const DefaultSidebar = Object.assign(
             onDock === false || (!onDock && docked != null)
               ? undefined
               : // compose to allow the host app to listen on default behavior
-                composeEventHandlers(onDock, (docked) => {
-                  setAppState({ defaultSidebarDockedPreference: docked });
-                })
+              composeEventHandlers(onDock, (docked) => {
+                setAppState({ defaultSidebarDockedPreference: docked });
+              })
           }
         >
           <Sidebar.Tabs>
@@ -185,8 +187,8 @@ export const TerraformCodeSidebar = Object.assign(
             onDock === false || (!onDock && docked != null)
               ? undefined
               : composeEventHandlers(onDock, (docked) => {
-                  setAppState({ terraformcodeSidebarDockedPreference: docked });
-                })
+                setAppState({ terraformcodeSidebarDockedPreference: docked });
+              })
           }
         >
           <Sidebar.Tabs>
@@ -209,7 +211,8 @@ export const TerraformCodeSidebar = Object.assign(
               <TerraformCodeSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
-            {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
+              {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
+              <MonacoEditor />
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
@@ -291,8 +294,8 @@ export const AwsLibSidebar = Object.assign(
             onDock === false || (!onDock && docked != null)
               ? undefined
               : composeEventHandlers(onDock, (docked) => {
-                  setAppState({ awslibSidebarDockedPreference: docked });
-                })
+                setAppState({ awslibSidebarDockedPreference: docked });
+              })
           }
         >
           <Sidebar.Tabs>
@@ -315,7 +318,7 @@ export const AwsLibSidebar = Object.assign(
               <AwsLibSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={AWSLIB_SIDEBAR_TAB}>
-            <AWSLibraryMenu/> 
+              <AWSLibraryMenu />
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>

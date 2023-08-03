@@ -1337,7 +1337,7 @@
 
 "@excalidraw/excalidraw@0.15.2":
   version "0.15.2"
-  resolved "https://registry.yarnpkg.com/@excalidraw/excalidraw/-/excalidraw-0.15.2.tgz#7dba4f6e10c52015a007efb75a9fc1afe598574c"
+  resolved "https://registry.npmjs.org/@excalidraw/excalidraw/-/excalidraw-0.15.2.tgz"
   integrity sha512-rTI02kgWSTXiUdIkBxt9u/581F3eXcqQgJdIxmz54TFtG3ughoxO5fr4t7Fr2LZIturBPqfocQHGKZ0t2KLKgw==
 
 "@excalidraw/prettier-config@1.0.2":
@@ -7801,6 +7801,11 @@ mkdirp@^0.5.6, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.6"
 
+monaco-editor@0.40.0:
+  version "0.40.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.40.0.tgz#d10834e15ad50a15ec61fd01892e508464ebe2fe"
+  integrity sha512-1wymccLEuFSMBvCk/jT1YDW/GuxMLYwnFwF9CDyYCxoTw2Pt379J3FUhwy9c43j51JdcxVPjwk0jm0EVDsBS2g==
+
 moo-color@^1.0.2:
   version "1.0.3"
   resolved "https://registry.npmjs.org/moo-color/-/moo-color-1.0.3.tgz"
@@ -9176,7 +9181,7 @@ react-dev-utils@^12.0.1:
 
 react-dom@18.2.0:
   version "18.2.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
+  resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
   dependencies:
     loose-envify "^1.1.0"
@@ -9292,7 +9297,7 @@ react-style-singleton@^2.2.1:
 
 react@18.2.0:
   version "18.2.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
+  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
