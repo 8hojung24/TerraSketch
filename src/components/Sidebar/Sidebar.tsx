@@ -145,7 +145,8 @@ export const SidebarInner = forwardRef(
             return;
           }
           if (!docked || !device.canDeviceFitSidebar) {
-            closeLibrary();
+            //closeLibrary(); 이부분 삭제(사이드바 외부 클릭 시 닫기는 효과 제거)
+
           }
         },
         [closeLibrary, docked, device.canDeviceFitSidebar],
