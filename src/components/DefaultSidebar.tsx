@@ -8,11 +8,8 @@ import { composeEventHandlers } from "../utils";
 import { useExcalidrawSetAppState } from "./App";
 import { withInternalFallback } from "./hoc/withInternalFallback";
 import { LibraryMenu } from "./LibraryMenu";
-import { AWSLibraryMenu } from "./AWSLibraryMenu"; //AWSLibraryMenu 파일 생성 필요
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
 import { Sidebar } from "./Sidebar/Sidebar";
-import MonacoEditor from './MonacoEditor'; //230802
-import React, { useRef, useState } from 'react'; //230802
 
 const DefaultSidebarTrigger = withInternalFallback(
   "DefaultSidebarTrigger",
@@ -294,8 +291,8 @@ export const AwsLibSidebar = Object.assign(
             onDock === false || (!onDock && docked != null)
               ? undefined
               : composeEventHandlers(onDock, (docked) => {
-                setAppState({ awslibSidebarDockedPreference: docked });
-              })
+                  setAppState({ awslibSidebarDockedPreference: docked });
+                })
           }
         >
           <Sidebar.Tabs>
@@ -318,7 +315,7 @@ export const AwsLibSidebar = Object.assign(
               <AwsLibSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={AWSLIB_SIDEBAR_TAB}>
-              <AWSLibraryMenu />
+            <AWSLibraryMenu/> 
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
