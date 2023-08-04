@@ -28,7 +28,7 @@
 
     overflow: hidden;
     border-radius: 0;
-    width: calc(#{$right-sidebar-width} - var(--space-factor) * 2);
+    width: calc(#{$right-sidebar-width} - var(--space-factor) * 2 + 100px);
 
     border-left: 1px solid var(--sidebar-border-color);
 
@@ -121,7 +121,7 @@
     }
   }
 
-  .sidebar-tabs-root > .sidebar__header {
+  .sidebar-tabs-root>.sidebar__header {
     padding-top: 0;
     padding-bottom: 1rem;
   }
