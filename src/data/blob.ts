@@ -74,6 +74,7 @@ const parseFileContents = async (blob: Blob | File) => {
   return contents;
 };
 
+// 파일 확장자를 기반으로 MIME 타입을 판별
 export const getMimeType = (blob: Blob | string): string => {
   let name: string;
   if (typeof blob === "string") {
@@ -96,6 +97,7 @@ export const getMimeType = (blob: Blob | string): string => {
   return "";
 };
 
+// FileSystemHandle 객체의 타입을 추출하여 반환
 export const getFileHandleType = (handle: FileSystemHandle | null) => {
   if (!handle) {
     return null;
@@ -104,17 +106,19 @@ export const getFileHandleType = (handle: FileSystemHandle | null) => {
   return handle.name.match(/\.(json|excalidraw|png|svg)$/)?.[1] || null;
 };
 
+//이미지 파일의 타입인지 확인
 export const isImageFileHandleType = (
   type: string | null,
 ): type is "png" | "svg" => {
   return type === "png" || type === "svg";
 };
 
+//지원되는 이미지 파일인지 확인
 export const isImageFileHandle = (handle: FileSystemHandle | null) => {
   const type = getFileHandleType(handle);
   return type === "png" || type === "svg";
 };
-
+//지원되는 이미지 파일인지 확인
 export const isSupportedImageFile = (
   blob: Blob | null | undefined,
 ): blob is Blob & { type: ValueOf<typeof IMAGE_MIME_TYPES> } => {
@@ -122,6 +126,7 @@ export const isSupportedImageFile = (
   return !!type && (Object.values(IMAGE_MIME_TYPES) as string[]).includes(type);
 };
 
+// Blob 또는 File 객체에서 데이터를 로드하여 Excalidraw 씬 또는 라이브러리 데이터를 반환
 export const loadSceneOrLibraryFromBlob = async (
   blob: Blob | File,
   /** @see restore.localAppState */
@@ -145,10 +150,10 @@ export const loadSceneOrLibraryFromBlob = async (
               ...cleanAppStateForExport(data.appState || {}),
               ...(localAppState
                 ? calculateScrollCenter(
-                    data.elements || [],
-                    localAppState,
-                    null,
-                  )
+                  data.elements || [],
+                  localAppState,
+                  null,
+                )
                 : {}),
             },
             files: data.files,
@@ -171,6 +176,7 @@ export const loadSceneOrLibraryFromBlob = async (
   }
 };
 
+//Blob 객체에서 Excalidraw 씬 데이터를 로드하여 반환
 export const loadFromBlob = async (
   blob: Blob,
   /** @see restore.localAppState */
@@ -191,6 +197,7 @@ export const loadFromBlob = async (
   return ret.data;
 };
 
+//주어진 JSON 문자열을 파싱하여 라이브러리 아이템 데이터로 변환
 export const parseLibraryJSON = (
   json: string,
   defaultStatus: LibraryItem["status"] = "unpublished",
@@ -203,6 +210,7 @@ export const parseLibraryJSON = (
   return restoreLibraryItems(libraryItems, defaultStatus);
 };
 
+//주어진 Blob 객체에서 라이브러리 아이템 데이터를 로드하여 반환
 export const loadLibraryFromBlob = async (
   blob: Blob,
   defaultStatus: LibraryItem["status"] = "unpublished",
@@ -210,6 +218,7 @@ export const loadLibraryFromBlob = async (
   return parseLibraryJSON(await parseFileContents(blob), defaultStatus);
 };
 
+//주어진 HTML 캔버스 요소로부터 Blob을 생성하여 반환
 export const canvasToBlob = async (
   canvas: HTMLCanvasElement,
 ): Promise<Blob> => {
@@ -234,6 +243,7 @@ export const canvasToBlob = async (
 
 /** generates SHA-1 digest from supplied file (if not supported, falls back
     to a 40-char base64 random id) */
+//주어진 파일로부터 고유한 파일 ID를 생성
 export const generateIdFromFile = async (file: File): Promise<FileId> => {
   try {
     const hashBuffer = await window.crypto.subtle.digest(
@@ -248,6 +258,7 @@ export const generateIdFromFile = async (file: File): Promise<FileId> => {
   }
 };
 
+//주어진 Blob 또는 File 객체로부터 데이터 URL을 생성하여 반환
 export const getDataURL = async (file: Blob | File): Promise<DataURL> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -273,6 +284,7 @@ export const dataURLToFile = (dataURL: DataURL, filename = "") => {
   return new File([ab], filename, { type: mimeType });
 };
 
+//이미지 파일을 리사이즈하여 반환
 export const resizeImageFile = async (
   file: File,
   opts: {
@@ -328,6 +340,7 @@ export const SVGStringToFile = (SVGString: string, filename: string = "") => {
   }) as File & { type: typeof MIME_TYPES.svg };
 };
 
+// React 드래그 이벤트에서 파일 및 파일 핸들을 추출하여 반환
 export const getFileFromEvent = async (
   event: React.DragEvent<HTMLDivElement>,
 ) => {
@@ -337,6 +350,7 @@ export const getFileFromEvent = async (
   return { file: file ? await normalizeFile(file) : null, fileHandle };
 };
 
+// React 드래그 이벤트로부터 파일 핸들을 추출하여 반환
 export const getFileHandle = async (
   event: React.DragEvent<HTMLDivElement>,
 ): Promise<FileSystemHandle | null> => {
@@ -399,6 +413,7 @@ export const createFile = (
 /** attempts to detect correct mimeType if none is set, or if an image
  * has an incorrect extension.
  * Note: doesn't handle missing .excalidraw/.excalidrawlib extension  */
+//주어진 파일 객체의 MIME 타입을 정규화하고 처리
 export const normalizeFile = async (file: File) => {
   if (!file.type) {
     if (file?.name?.endsWith(".excalidrawlib")) {
@@ -433,6 +448,7 @@ export const normalizeFile = async (file: File) => {
   return file;
 };
 
+//주어진 Blob 객체의 내용을 ArrayBuffer 형태로 변환하여 반환
 export const blobToArrayBuffer = (blob: Blob): Promise<ArrayBuffer> => {
   if ("arrayBuffer" in blob) {
     return blob.arrayBuffer();
