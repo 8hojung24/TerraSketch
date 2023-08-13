@@ -58,11 +58,11 @@ export const LibraryMenuContent = ({
     const addToLibrary = useCallback(
         async (elements: LibraryItem["elements"], libraryItems: LibraryItems) => {
             trackEvent("element", "addToLibrary", "ui");
-            if (elements.some((element) => element.type === "image")) {
+{/*            if (elements.some((element) => element.type === "image")) {
                 return setAppState({
                     errorMessage: "Support for adding images to the library coming soon!",
                 });
-            }
+            }*/}
             const nextItems: LibraryItems = [
                 {
                     status: "unpublished",

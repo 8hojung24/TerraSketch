@@ -14,7 +14,7 @@ export const actionAddToLibrary = register({
       appState,
       true,
     );
-    if (selectedElements.some((element) => element.type === "image")) {
+    /*if (selectedElements.some((element) => element.type === "image")) {
       return {
         commitToHistory: false,
         appState: {
@@ -22,7 +22,7 @@ export const actionAddToLibrary = register({
           errorMessage: "Support for adding images to the library coming soon!",
         },
       };
-    }
+    }*/
 
     return app.library
       .getLatestLibrary()

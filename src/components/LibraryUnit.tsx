@@ -18,9 +18,9 @@ export const LibraryUnit = ({
 }: {
   id: LibraryItem["id"] | /** for pending item */ null;
   elements?: LibraryItem["elements"];
-  isPending?: boolean;
-  onClick: (id: LibraryItem["id"] | null) => void;
-  selected: boolean;
+  isPending?: boolean; //라이브러리 항목이 처리중인지 여부
+  onClick: (id: LibraryItem["id"] | null) => void; //아이템 클릭 시 id를 인자로 받음
+  selected: boolean; //아이템이 선택되었는지 여부
   onToggle: (id: string, event: React.MouseEvent) => void;
   onDrag: (id: string, event: React.DragEvent) => void;
 }) => {
@@ -34,20 +34,21 @@ export const LibraryUnit = ({
       return;
     }
 
+    //svg가 존재하면 이미지 내부의 .style-fonts 클래스(스타일 관련) 제거
     if (svg) {
       svg.querySelector(".style-fonts")?.remove();
-      node.innerHTML = svg.outerHTML;
+      node.innerHTML = svg.outerHTML; //이미지의 outerHTML을 이용해 html 내용을 업데이트
     }
 
     return () => {
-      node.innerHTML = "";
+      node.innerHTML = ""; //이전 html 내용을 비우는 역할
     };
   }, [elements, svg]);
 
-  const [isHovered, setIsHovered] = useState(false);
-  const isMobile = useDevice().isMobile;
+  const [isHovered, setIsHovered] = useState(false); //상테 초기화
+  const isMobile = useDevice().isMobile; //모바일 실행 여부
   const adder = isPending && (
-    <div className="library-unit__adder">{PlusIcon}</div>
+    <div className="library-unit__adder">{PlusIcon}</div> //아이콘 표시
   );
 
   return (
@@ -68,13 +69,13 @@ export const LibraryUnit = ({
         draggable={!!elements}
         onClick={
           !!elements || !!isPending
-            ? (event) => {
-                if (id && event.shiftKey) {
-                  onToggle(id, event);
-                } else {
-                  onClick(id);
-                }
+            ? (event) => { //아이템 클릭 시 처리할 함수 정의
+              if (id && event.shiftKey) { //id존재&shiftKey가 눌려있을 경우
+                onToggle(id, event); //항목의 선택 여부를 검사
+              } else {
+                onClick(id);//그렇지 않으면 이 함수 호출해 해당 항목을 클릭한 것으로 처리
               }
+            }
             : undefined
         }
         onDragStart={(event) => {

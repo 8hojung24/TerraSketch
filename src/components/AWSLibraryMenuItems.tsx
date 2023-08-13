@@ -185,11 +185,11 @@ export default function AWSLibraryMenuItems({
                 }}
             >
                 <>
-                    {/*{!isLibraryEmpty && (
+                    {!isLibraryEmpty && (
                         <div className="library-menu-items-container__header">
                             {t("labels.personalLib")}
                         </div>
-                    )}*/}
+                    )}
                     {isLoading && (
                         <div
                             style={{
@@ -202,7 +202,7 @@ export default function AWSLibraryMenuItems({
                             <Spinner />
                         </div>
                     )}
-                    {/*
+
                     {!pendingElements.length && !unpublishedItems.length ? (
                         <div className="library-menu-items__no-items">
                             <div className="library-menu-items__no-items__label">
@@ -228,17 +228,17 @@ export default function AWSLibraryMenuItems({
                             onClick={onItemClick}
                             isItemSelected={isItemSelected}
                         />
-                    )}*/}
+                    )}
                 </>
 
                 <>
-                    {(publishedItems.length > 0 ||
+                    {/* {(publishedItems.length > 0 ||
                         pendingElements.length > 0 ||
                         unpublishedItems.length > 0) && (
                             <div className="library-menu-items-container__header library-menu-items-container__header--excal">
                                 AWS Architecture Icons
-                            </div>
-                        )}
+                        </div>
+                        )}*/}
                     {publishedItems.length > 0 ? (
                         <LibraryMenuSection
                             items={publishedItems}
