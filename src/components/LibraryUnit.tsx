@@ -95,6 +95,11 @@ export const LibraryUnit = ({
           className="library-unit__checkbox"
         />
       )}
+      {/* 아이템 ID를 표시하는 부분 추가 */}
+      <div className="item-id">
+        Item ID: {id}
+      </div>
+
     </div>
   );
 };
