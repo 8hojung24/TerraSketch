@@ -19,6 +19,14 @@
         }
     }
 
+    .image-bg {
+        height: 40px;
+        width: 40px;
+        background-image: url('../image/Amazon_SNS.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
     &.theme--dark {
         .library-menu-items__no-items {
             color: var(--color-gray-40);

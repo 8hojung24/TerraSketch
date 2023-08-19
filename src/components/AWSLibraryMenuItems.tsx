@@ -190,13 +190,10 @@ export default function AWSLibraryMenuItems({
                             {t("labels.personalLib")}
                         </div>
                     )}
-
-                    {/* AWS라이브러리 제목 하나 더 생성(테스트용) */}
-                    {!isLibraryEmpty && (
-                        <div className="library-menu-items-container__header">
-                            {t("labels.personalLib")}
-                        </div>
-                    )}
+                    {/* 테스트용 이미지 추가 */}
+                    <div className="awsImage">
+                        <div className="image-bg"></div>
+                    </div>
 
                     {isLoading && (
                         <div

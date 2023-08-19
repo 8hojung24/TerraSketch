@@ -10,7 +10,7 @@ import { withInternalFallback } from "./hoc/withInternalFallback";
 import { LibraryMenu } from "./LibraryMenu";
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
 import { Sidebar } from "./Sidebar/Sidebar";
-import MonacoEditor  from './MonacoEditor';
+import MonacoEditor from './MonacoEditor';
 import { AWSLibraryMenu } from "./AWSLibraryMenu";
 
 const DefaultSidebarTrigger = withInternalFallback(
@@ -211,7 +211,7 @@ export const TerraformCodeSidebar = Object.assign(
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
               {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
-              <MonacoEditor />
+              <MonacoEditor code={'ex'} />
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
@@ -293,8 +293,8 @@ export const AwsLibSidebar = Object.assign(
             onDock === false || (!onDock && docked != null)
               ? undefined
               : composeEventHandlers(onDock, (docked) => {
-                  setAppState({ awslibSidebarDockedPreference: docked });
-                })
+                setAppState({ awslibSidebarDockedPreference: docked });
+              })
           }
         >
           <Sidebar.Tabs>
@@ -317,7 +317,7 @@ export const AwsLibSidebar = Object.assign(
               <AwsLibSidebarTabTriggersTunnel.Out />
             </Sidebar.Header>
             <Sidebar.Tab tab={AWSLIB_SIDEBAR_TAB}>
-            <AWSLibraryMenu/> 
+              <AWSLibraryMenu />
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
