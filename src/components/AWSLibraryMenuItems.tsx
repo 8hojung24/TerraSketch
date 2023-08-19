@@ -190,6 +190,14 @@ export default function AWSLibraryMenuItems({
                             {t("labels.personalLib")}
                         </div>
                     )}
+
+                    {/* AWS라이브러리 제목 하나 더 생성(테스트용) */}
+                    {!isLibraryEmpty && (
+                        <div className="library-menu-items-container__header">
+                            {t("labels.personalLib")}
+                        </div>
+                    )}
+
                     {isLoading && (
                         <div
                             style={{
@@ -203,7 +211,9 @@ export default function AWSLibraryMenuItems({
                         </div>
                     )}
 
-                    {!pendingElements.length && !unpublishedItems.length ? (
+
+                    {/* 추가된 아이템 없음 표시 주석처리함_0819 */}
+                    {/* {!pendingElements.length && !unpublishedItems.length ? (
                         <div className="library-menu-items__no-items">
                             <div className="library-menu-items__no-items__label">
                                 {t("library.noItems")}
@@ -228,7 +238,7 @@ export default function AWSLibraryMenuItems({
                             onClick={onItemClick}
                             isItemSelected={isItemSelected}
                         />
-                    )}
+                    )} */}
                 </>
 
                 <>
