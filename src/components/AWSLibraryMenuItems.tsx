@@ -19,14 +19,14 @@ import LibraryMenuSection from "./LibraryMenuSection";
 import "./AWSLibraryMenuItems.scss";
 
 export default function AWSLibraryMenuItems({
-    isLoading,
-    libraryItems,
-    onAddToLibrary,
-    onInsertLibraryItems,
-    pendingElements,
+    isLoading, //메뉴 로딩중인지 여부
+    libraryItems, //메뉴에 표시할 라이브러리 항목 배열
+    onAddToLibrary, //라이브러리에 요소 추가 처리
+    onInsertLibraryItems, //캔버스에 라이브러리 항목 삽입 처리
+    pendingElements, //라이브러리에 추가 대기중인 요소
     theme,
-    id,
-    libraryReturnUrl,
+    id, //구성요소 식별자
+    libraryReturnUrl, //라이브러리와 상호작용 후 반환할 URL
 }: {
     isLoading: boolean;
     libraryItems: LibraryItems;
@@ -38,7 +38,9 @@ export default function AWSLibraryMenuItems({
     id: string;
 }) {
     const [selectedItems, setSelectedItems] = useState<LibraryItem["id"][]>([]);
+    //선택한 라이브러리 항목을 추적하기 위한 상태 변수
 
+    //라이브러리 항목 필터링: unpublishedItems, publishedItems
     const unpublishedItems = libraryItems.filter(
         (item) => item.status !== "published",
     );
@@ -46,39 +48,47 @@ export default function AWSLibraryMenuItems({
         (item) => item.status === "published",
     );
 
+    //버튼 표시 여부 결정
     const showBtn = !libraryItems.length && !pendingElements.length;
 
+    //빈 라이브러리
     const isLibraryEmpty =
         !pendingElements.length &&
         !unpublishedItems.length &&
         !publishedItems.length;
 
+    //라이브러리가 비어 있는지 여부를 결정
     const [lastSelectedItem, setLastSelectedItem] = useState<
         LibraryItem["id"] | null
     >(null);
 
+    //선택된 라이브러리 항목을 추적하기 위한 상태 변수
     const onItemSelectToggle = (
-        id: LibraryItem["id"],
-        event: React.MouseEvent,
+        id: LibraryItem["id"], //아이템 id 가져옴
+        event: React.MouseEvent, //마우스 이벤트 감지
     ) => {
         const shouldSelect = !selectedItems.includes(id);
+        //shouldSelect변수: 선택된 항목이면 false, 선택되지 않은 항목이면 true
 
         const orderedItems = [...unpublishedItems, ...publishedItems];
+        //unpublishedItems, publishedItems 배열을 합쳐 라이브러리 항목을 하나의 배열로 만듦
 
-        if (shouldSelect) {
-            if (event.shiftKey && lastSelectedItem) {
+        if (shouldSelect) { //shouldSelect이 true인 경우(아직 선택되지 않은 항목)
+            if (event.shiftKey && lastSelectedItem) { //Shift 키 누른 상태에서 여러 항목 선택
                 const rangeStart = orderedItems.findIndex(
-                    (item) => item.id === lastSelectedItem,
-                );
+                    (item) => item.id === lastSelectedItem, //선택한 여러 항목 중 마지막으로 선택한것의 id
+                );//마지막이 탐지될 경우 이것의 인덱스 찾음
                 const rangeEnd = orderedItems.findIndex((item) => item.id === id);
 
                 if (rangeStart === -1 || rangeEnd === -1) {
                     setSelectedItems([...selectedItems, id]);
                     return;
-                }
+                }//여기까지 shift 키로 여러 항목 선택하는 경우에 대한 코드
+
 
                 const selectedItemsMap = arrayToMap(selectedItems);
-                const nextSelectedIds = orderedItems.reduce(
+                //선택 아이템을 Map(사전) 형태로 변환 -> 선택 항목의 Id를 key로 갖고있음
+                const nextSelectedIds = orderedItems.reduce( //배열 값 순회하면서 누적
                     (acc: LibraryItem["id"][], item, idx) => {
                         if (
                             (idx >= rangeStart && idx <= rangeEnd) ||
@@ -89,7 +99,7 @@ export default function AWSLibraryMenuItems({
                         return acc;
                     },
                     [],
-                );
+                );//여기까지도 shift 키로 여러 항목 선택하는 경우에 대한 코드
 
                 setSelectedItems(nextSelectedIds);
             } else {
@@ -100,37 +110,42 @@ export default function AWSLibraryMenuItems({
             setLastSelectedItem(null);
             setSelectedItems(selectedItems.filter((_id) => _id !== id));
         }
-    };
+    };//여기까지도 shift 키로 여러 항목 선택하는 경우에 대한 코드
 
+
+    //라이브러리 항목의 id에 따라 어떤 요소를 반환할지 결정
     const getInsertedElements = useCallback(
-        (id: string) => {
-            let targetElements;
-            if (selectedItems.includes(id)) {
+        (id: string) => { //id 문자열 받아옴
+            let targetElements; //나중에 반환될 요소들을 저장
+            if (selectedItems.includes(id)) { //현재 선택한 항목에 현재 id가 포함되어 있는지 확인
                 targetElements = libraryItems.filter((item) =>
                     selectedItems.includes(item.id),
-                );
-            } else {
+                ); //즉, 여러 항목 선택했는지 검사
+            } else { //한 아이템만 선택했다면
                 targetElements = libraryItems.filter((item) => item.id === id);
             }
-            return targetElements.map((item) => {
+            return targetElements.map((item) => {//선택된 항목에 대한 배열 반환
                 return {
-                    ...item,
+                    ...item, //현재 라이브러리의 모든 속성 복사
                     // duplicate each library item before inserting on canvas to confine
                     // ids and bindings to each library item. See #6465
                     elements: duplicateElements(item.elements, { randomizeSeed: true }),
-                };
+                }; // 현재 라이브러리 항목의 elements 속성을 복제, 이에 대한 고유 id 연결 생성
             });
         },
         [libraryItems, selectedItems],
-    );
+    );//즉, 요소간에 고유 id를 바인딩해 충돌 방지, 라이브러리 항목간 독립성 보장
 
+    //드래그 항목의 id, 드래그 이벤트 파라미터 받음
     const onItemDrag = (id: LibraryItem["id"], event: React.DragEvent) => {
-        event.dataTransfer.setData(
-            MIME_TYPES.excalidrawlib,
-            serializeLibraryAsJSON(getInsertedElements(id)),
+        event.dataTransfer.setData( //드래그 데이터 설정
+            MIME_TYPES.excalidrawlib, //드래그 데이터 형식: excalidrawlib
+            serializeLibraryAsJSON(getInsertedElements(id)),//아이템 JSON 형식 값
         );
     };
 
+    //이걸 이용해서 Terraform 사이드바 여는걸 건들면 되지 않을까...?
+    //아이템 ID가 현재 선택되었는지 여부
     const isItemSelected = (id: LibraryItem["id"] | null) => {
         if (!id) {
             return false;

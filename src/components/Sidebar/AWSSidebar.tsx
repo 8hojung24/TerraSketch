@@ -135,7 +135,7 @@ export const AWSSidebarInner = forwardRef(
             setAppState({ openSidebar: null });
         }, [setAppState]);
 
-        useOnClickOutside(
+        useOnClickOutside( //사이드바 외부 클릭 시 사이드바 닫기
             islandRef,
             useCallback(
                 (event) => {
