@@ -13,19 +13,21 @@ type FILE_EXTENSION = Exclude<keyof typeof MIME_TYPES, "binary">;
 const INPUT_CHANGE_INTERVAL_MS = 500;
 
 export const fileOpen = <M extends boolean | undefined = false>(opts: {
-  extensions?: FILE_EXTENSION[];
-  description: string;
+  extensions?: FILE_EXTENSION[]; //파일 확장자 목록
+  description: string; //파일 대화상자에 표시될 설명
   multiple?: M;
 }): Promise<M extends false | undefined ? File : File[]> => {
   // an unsafe TS hack, alas not much we can do AFAIK
   type RetType = M extends false | undefined ? File : File[];
 
+  //파일 확장자를 MIME 타입으로 변환
   const mimeTypes = opts.extensions?.reduce((mimeTypes, type) => {
     mimeTypes.push(MIME_TYPES[type]);
 
     return mimeTypes;
   }, [] as string[]);
 
+  //파일 확장자를 ".jpg" 또는 ".jpeg"로 변환
   const extensions = opts.extensions?.reduce((acc, ext) => {
     if (ext === "jpg") {
       return acc.concat(".jpg", ".jpeg");
@@ -33,6 +35,7 @@ export const fileOpen = <M extends boolean | undefined = false>(opts: {
     return acc.concat(`.${ext}`);
   }, [] as string[]);
 
+  // 실제 파일 열기 작업을 수행하는 _fileOpen 함수를 호출하고 Promise를 반환
   return _fileOpen({
     description: opts.description,
     extensions,
@@ -47,10 +50,10 @@ export const fileOpen = <M extends boolean | undefined = false>(opts: {
         scheduleRejection();
       };
       const checkForFile = () => {
-        // this hack might not work when expecting multiple files
+        // checkForFile 함수를 호출하여 파일이 선택되었는지 확인
         if (input.files?.length) {
           const ret = opts.multiple ? [...input.files] : input.files[0];
-          resolve(ret as RetType);
+          resolve(ret as RetType);// 선택한 파일을 resolve 함수를 통해 반환
         }
       };
       requestAnimationFrame(() => {

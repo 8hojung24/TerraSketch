@@ -22,6 +22,7 @@ import {
   DEFAULT_SIDEBAR,
   LIBRARY_SIDEBAR_TAB,
 } from "../constants";
+//import {} "../../"test.excalidrawlib";
 
 export const libraryItemsAtom = atom<{
   status: "loading" | "loaded"; //현재 아이템의 로딩상태
@@ -345,6 +346,8 @@ export const distributeLibraryItemsOnSquareGrid = ( //분산시킬 라이브러�
   return resElements;
 };
 
+
+
 export const parseLibraryTokensFromUrl = () => {
   const libraryUrl = "https://libraries.excalidraw.com/libraries/childishgirl/aws-architecture-icons.excalidrawlib";
   //바로 라이브러리에 AWS 아이콘이 추가되도록 함
@@ -378,7 +381,7 @@ export const useHandleLibrary = ({
       return;
     }
 
-    //이브러리 URL에서 데이터를 가져와 라이브러리를 업데이트
+    //라이브러리 URL에서 데이터를 가져와 라이브러리를 업데이트
     const importLibraryFromURL = async ({
       libraryUrl,
       idToken,
