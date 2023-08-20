@@ -147,19 +147,20 @@ export default function AWSLibraryMenuItems({
     //이걸 이용해서 Terraform 사이드바 여는걸 건들면 되지 않을까...?
     //아이템 ID가 현재 선택되었는지 여부
     const isItemSelected = (id: LibraryItem["id"] | null) => {
-        if (!id) {
+        if (!id) { //id가 null인 경우 -> 선택되지 않은 경우
             return false;
         }
-
-        return selectedItems.includes(id);
+        return selectedItems.includes(id); //선택 id가 배열에 포함된 경우(선택된 경우)
     };
 
+    //라이브러리 항목 클릭 시 작업 수행
     const onItemClick = useCallback(
-        (id: LibraryItem["id"] | null) => {
-            if (!id) {
+        (id: LibraryItem["id"] | null) => { //클릭된 아이템 id 가져옴
+            if (!id) { //클릭 항목이 null인 경우
                 onAddToLibrary(pendingElements);
             } else {
                 onInsertLibraryItems(getInsertedElements(id));
+                //클릭 항목이 유효할 경우 캔버스에 삽입하기 전 id와 바인딩
             }
         },
         [
@@ -205,10 +206,6 @@ export default function AWSLibraryMenuItems({
                             {t("labels.personalLib")}
                         </div>
                     )}
-                    {/* 테스트용 이미지 추가 */}
-                    <div className="awsImage">
-                        <div className="image-bg"></div>
-                    </div>
 
                     {isLoading && (
                         <div
