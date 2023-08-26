@@ -109,6 +109,7 @@ describe("export", () => {
   it("exporting svg containing transformed images", async () => {
     const normalizeAngle = (angle: number) => (angle / 180) * Math.PI;
 
+    const terraform_code = "example";
     const elements = [
       API.createElement({
         type: "image",
@@ -159,6 +160,7 @@ describe("export", () => {
         mimeType: "image/png",
         created: Date.now(),
         lastRetrieved: Date.now(),
+        terraform_code: "",
       },
     } as const;
 

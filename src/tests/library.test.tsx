@@ -102,6 +102,7 @@ describe("library", () => {
               status: "published",
               elements: [rectangle, text, arrow],
               created: 1,
+              terraform_code: "example",
             },
           ]),
         ],
@@ -146,6 +147,7 @@ describe("library", () => {
       status: "published",
       elements: [elem1],
       created: 1,
+      terraform_code: "example_code"
     };
 
     await API.drop(
@@ -223,6 +225,7 @@ describe("distributeLibraryItemsOnSquareGrid()", () => {
         elements,
         status: "unpublished",
         created: Date.now(),
+        terraform_code: "",
       };
     };
 

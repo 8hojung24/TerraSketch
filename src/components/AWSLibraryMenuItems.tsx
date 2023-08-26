@@ -15,8 +15,16 @@ import { duplicateElements } from "../element/newElement";
 import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
 import { LibraryDropdownMenu } from "./LibraryMenuHeaderContent";
 import LibraryMenuSection from "./LibraryMenuSection";
-
 import "./AWSLibraryMenuItems.scss";
+import { TerraformCodeSidebar } from "./DefaultSidebar"; //230822
+import { trackEvent } from "../analytics"; //230822
+import { Provider, useAtomValue } from "jotai"; //230822
+import { isSidebarDockedAtom, isTerraformCodeSidebarDockedAtom } from "./Sidebar/Sidebar";//230822
+import { TerraformCodeIcon } from "./icons";
+import { capitalizeString } from "../utils";
+import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
+import { jotaiScope } from "../jotai";
+
 
 export default function AWSLibraryMenuItems({
     isLoading, //메뉴 로딩중인지 여부
@@ -62,11 +70,55 @@ export default function AWSLibraryMenuItems({
         LibraryItem["id"] | null
     >(null);
 
+    //230822:AWS요소 선택 시 코드창 바로 뜨도록
+    const openTSidebarFunction = () => {
+        const renderTerraformCodeSidebars = () => {
+            return (
+                <TerraformCodeSidebar
+                    __fallback
+                    onDock={(docked) => {
+                        trackEvent(
+                            "toolbar",
+                            `toggleDock (${docked ? "dock" : "undock"})`,
+                            //`(${device.isMobile ? "mobile" : "desktop"})`, //디바이스는 일단 고려 안함
+                        );
+                    }}
+                />
+            );
+        };
+        const layerUIJSX = (
+            <>
+                <TerraformCodeSidebar.Trigger
+                    __fallback
+                    icon={TerraformCodeIcon}
+                    title={capitalizeString(t("toolBar.terraformCode"))}
+                    onToggle={(open) => {
+                        if (open) {
+                            trackEvent(
+                                "sidebar",
+                                `${TERRAFORMCODE_SIDEBAR.name} (open)`,
+                                //`button (${device.isMobile ? "mobile" : "desktop"})`,
+                            );
+                        }
+                    }}
+                    tab={TERRAFORMCODE_SIDEBAR.defaultTab}
+                >
+                </TerraformCodeSidebar.Trigger>
+
+                {renderTerraformCodeSidebars()}
+            </>
+        );
+    };
+    
+    const isTerraformCodeSidebarDocked = useAtomValue(isTerraformCodeSidebarDockedAtom, jotaiScope);
+    //여기까지
+
     //선택된 라이브러리 항목을 추적하기 위한 상태 변수
     const onItemSelectToggle = (
         id: LibraryItem["id"], //아이템 id 가져옴
         event: React.MouseEvent, //마우스 이벤트 감지
     ) => {
+        
         const shouldSelect = !selectedItems.includes(id);
         //shouldSelect변수: 선택된 항목이면 false, 선택되지 않은 항목이면 true
 
@@ -79,11 +131,12 @@ export default function AWSLibraryMenuItems({
                     (item) => item.id === lastSelectedItem, //선택한 여러 항목 중 마지막으로 선택한것의 id
                 );//마지막이 탐지될 경우 이것의 인덱스 찾음
                 const rangeEnd = orderedItems.findIndex((item) => item.id === id);
-
+                openTSidebarFunction();
                 if (rangeStart === -1 || rangeEnd === -1) {
                     setSelectedItems([...selectedItems, id]);
                     return;
                 }//여기까지 shift 키로 여러 항목 선택하는 경우에 대한 코드
+
 
 
                 const selectedItemsMap = arrayToMap(selectedItems);
@@ -153,15 +206,16 @@ export default function AWSLibraryMenuItems({
         return selectedItems.includes(id); //선택 id가 배열에 포함된 경우(선택된 경우)
     };
 
-    //라이브러리 항목 클릭 시 작업 수행
+    //라이브러리 항목 클릭 시 작업 수행 -> 이 부분 이용해서 terraform 가져오는 함수 복제하기
     const onItemClick = useCallback(
+
         (id: LibraryItem["id"] | null) => { //클릭된 아이템 id 가져옴
             if (!id) { //클릭 항목이 null인 경우
                 onAddToLibrary(pendingElements);
             } else {
                 onInsertLibraryItems(getInsertedElements(id));
                 //클릭 항목이 유효할 경우 캔버스에 삽입하기 전 id와 바인딩
-            }
+            } //console.log(id);
         },
         [
             getInsertedElements,

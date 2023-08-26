@@ -310,9 +310,8 @@ export const loadFilesFromFirebase = async (
   await Promise.all(
     [...new Set(filesIds)].map(async (id) => {
       try {
-        const url = `https://firebasestorage.googleapis.com/v0/b/${
-          FIREBASE_CONFIG.storageBucket
-        }/o/${encodeURIComponent(prefix.replace(/^\//, ""))}%2F${id}`;
+        const url = `https://firebasestorage.googleapis.com/v0/b/${FIREBASE_CONFIG.storageBucket
+          }/o/${encodeURIComponent(prefix.replace(/^\//, ""))}%2F${id}`;
         const response = await fetch(`${url}?alt=media`);
         if (response.status < 400) {
           const arrayBuffer = await response.arrayBuffer();
@@ -332,6 +331,7 @@ export const loadFilesFromFirebase = async (
             dataURL,
             created: metadata?.created || Date.now(),
             lastRetrieved: metadata?.created || Date.now(),
+            terraform_code: "",
           });
         } else {
           erroredFiles.set(id, true);

@@ -136,6 +136,7 @@ export default function App({ appTitle, useCustom, customArgs }: AppProps) {
             mimeType: MIME_TYPES.jpg,
             created: 1644915140367,
             lastRetrieved: 1644915140367,
+            terraform_code: "example",
           },
         ];
 
@@ -213,8 +214,8 @@ export default function App({ appTitle, useCustom, customArgs }: AppProps) {
               type: ROUNDNESS.ADAPTIVE_RADIUS,
               value: 32,
             },
-            terraform : null,
-            aws : null,
+            terraform: null,
+            aws: null,
           },
         ],
         null,
@@ -292,12 +293,10 @@ export default function App({ appTitle, useCustom, customArgs }: AppProps) {
         { sceneX: commentIcons[id].x, sceneY: commentIcons[id].y },
         appstate,
       );
-      ele.style.left = `${
-        x - COMMENT_ICON_DIMENSION / 2 - appstate!.offsetLeft
-      }px`;
-      ele.style.top = `${
-        y - COMMENT_ICON_DIMENSION / 2 - appstate!.offsetTop
-      }px`;
+      ele.style.left = `${x - COMMENT_ICON_DIMENSION / 2 - appstate!.offsetLeft
+        }px`;
+      ele.style.top = `${y - COMMENT_ICON_DIMENSION / 2 - appstate!.offsetTop
+        }px`;
     });
   };
 
@@ -551,12 +550,14 @@ export default function App({ appTitle, useCustom, customArgs }: AppProps) {
                   id: "1",
                   created: 1,
                   elements: initialData.libraryItems[1] as any,
+                  terraform_code: "ex1",
                 },
                 {
                   status: "unpublished",
                   id: "2",
                   created: 2,
                   elements: initialData.libraryItems[1] as any,
+                  terraform_code: "ex2",
                 },
               ];
               excalidrawAPI?.updateLibrary({

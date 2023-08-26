@@ -33,6 +33,7 @@ export const actionAddToLibrary = register({
             status: "unpublished",
             elements: selectedElements.map(deepCopyElement),
             created: Date.now(),
+            terraform_code: "",
           },
           ...items,
         ]);

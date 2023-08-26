@@ -196,6 +196,7 @@ export const encodeFilesForUpload = async ({
         mimeType: fileData.mimeType,
         created: Date.now(),
         lastRetrieved: Date.now(),
+        terraform_code: "",
       },
     });
 

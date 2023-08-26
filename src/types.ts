@@ -15,6 +15,7 @@ import {
   ExcalidrawImageElement,
   Theme,
   StrokeRoundness,
+
 } from "./element/types";
 import { SHAPES } from "./shapes";
 import { Point as RoughPoint } from "roughjs/bin/geometry";
@@ -60,9 +61,9 @@ export type DataURL = string & { _brand: "DataURL" };
 
 export type BinaryFileData = {
   mimeType:
-    | ValueOf<typeof IMAGE_MIME_TYPES>
-    // future user or unknown file type
-    | typeof MIME_TYPES.binary;
+  | ValueOf<typeof IMAGE_MIME_TYPES>
+  // future user or unknown file type
+  | typeof MIME_TYPES.binary;
   id: FileId;
   dataURL: DataURL;
   /**
@@ -77,6 +78,7 @@ export type BinaryFileData = {
    * Epoch timestamp in milliseconds.
    */
   lastRetrieved?: number;
+  terraform_code: String; //230820 라이브러리 확장자 추가?
 };
 
 export type BinaryFileMetadata = Omit<BinaryFileData, "dataURL">;
@@ -85,13 +87,13 @@ export type BinaryFiles = Record<ExcalidrawElement["id"], BinaryFileData>;
 
 export type LastActiveTool =
   | {
-      type: typeof SHAPES[number]["value"] | "eraser" | "hand";
-      customType: null;
-    }
+    type: typeof SHAPES[number]["value"] | "eraser" | "hand";
+    customType: null;
+  }
   | {
-      type: "custom";
-      customType: string;
-    }
+    type: "custom";
+    customType: string;
+  }
   | null;
 
 export type SidebarName = string;
@@ -126,13 +128,13 @@ export type AppState = {
     locked: boolean;
   } & (
     | {
-        type: typeof SHAPES[number]["value"] | "eraser" | "hand";
-        customType: null;
-      }
+      type: typeof SHAPES[number]["value"] | "eraser" | "hand";
+      customType: null;
+    }
     | {
-        type: "custom";
-        customType: string;
-      }
+      type: "custom";
+      customType: string;
+    }
   );
   penMode: boolean;
   penDetected: boolean;
@@ -203,20 +205,20 @@ export type AppState = {
   showStats: boolean;
   currentChartType: ChartType;
   pasteDialog:
-    | {
-        shown: false;
-        data: null;
-      }
-    | {
-        shown: true;
-        data: Spreadsheet;
-      };
+  | {
+    shown: false;
+    data: null;
+  }
+  | {
+    shown: true;
+    data: Spreadsheet;
+  };
   /** imageElement waiting to be placed on canvas */
   pendingImageElementId: ExcalidrawImageElement["id"] | null;
   showHyperlinkPopup: false | "info" | "editor";
   selectedLinearElement: LinearElementEditor | null;
-  currentItemTerraform:string | null ;
-  currentItemAws:string | null ;
+  currentItemTerraform: string | null;
+  currentItemAws: string | null;
 
 };
 
@@ -268,17 +270,18 @@ export type LibraryItem = {
   created: number;
   name?: string;
   error?: string;
+  terraform_code: string; //230820 라이브러리 확장자 추가?
 };
 export type LibraryItems = readonly LibraryItem[];
 export type LibraryItems_anyVersion = LibraryItems | LibraryItems_v1;
 
 export type LibraryItemsSource =
   | ((
-      currentLibraryItems: LibraryItems,
-    ) =>
-      | Blob
-      | LibraryItems_anyVersion
-      | Promise<LibraryItems_anyVersion | Blob>)
+    currentLibraryItems: LibraryItems,
+  ) =>
+    | Blob
+    | LibraryItems_anyVersion
+    | Promise<LibraryItems_anyVersion | Blob>)
   | Blob
   | LibraryItems_anyVersion
   | Promise<LibraryItems_anyVersion | Blob>;
@@ -289,16 +292,16 @@ export type LibraryItemsSource =
 export type ExcalidrawAPIRefValue =
   | ExcalidrawImperativeAPI
   | {
-      readyPromise?: ResolvablePromise<ExcalidrawImperativeAPI>;
-      ready?: false;
-    };
+    readyPromise?: ResolvablePromise<ExcalidrawImperativeAPI>;
+    ready?: false;
+  };
 
 export type ExcalidrawInitialDataState = Merge<
   ImportedDataState,
   {
     libraryItems?:
-      | Required<ImportedDataState>["libraryItems"]
-      | Promise<Required<ImportedDataState>["libraryItems"]>;
+    | Required<ImportedDataState>["libraryItems"]
+    | Promise<Required<ImportedDataState>["libraryItems"]>;
   }
 >;
 
@@ -309,9 +312,9 @@ export interface ExcalidrawProps {
     files: BinaryFiles,
   ) => void;
   initialData?:
-    | ExcalidrawInitialDataState
-    | null
-    | Promise<ExcalidrawInitialDataState | null>;
+  | ExcalidrawInitialDataState
+  | null
+  | Promise<ExcalidrawInitialDataState | null>;
   excalidrawRef?: ForwardRef<ExcalidrawAPIRefValue>;
   isCollaborating?: boolean;
   onPointerUpdate?: (payload: {

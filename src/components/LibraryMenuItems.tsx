@@ -36,8 +36,9 @@ export default function LibraryMenuItems({
   libraryReturnUrl: ExcalidrawProps["libraryReturnUrl"];
   theme: UIAppState["theme"];
   id: string;
+  //terraform_code: LibraryItem["terraform_code"];
 }) {
-  const [selectedItems, setSelectedItems] = useState<LibraryItem["id"][]>([]);
+  const [selectedItems, setSelectedItems] = useState<LibraryItem["terraform_code"][]>([]);
 
   const unpublishedItems = libraryItems.filter(
     (item) => item.status !== "published",
@@ -140,12 +141,13 @@ export default function LibraryMenuItems({
   };
 
   const onItemClick = useCallback(
-    (id: LibraryItem["id"] | null) => {
+    (id: LibraryItem["terraform_code"] | null) => {
       if (!id) {
         onAddToLibrary(pendingElements);
       } else {
         onInsertLibraryItems(getInsertedElements(id));
       }
+      console.log(id);
     },
     [
       getInsertedElements,

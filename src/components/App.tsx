@@ -1030,11 +1030,11 @@ class App extends React.Component<AppProps, AppState> {
       );
       const canDeviceFitSidebarMediaQuery = window.matchMedia(
         `(min-width: ${
-          // NOTE this won't update if a different breakpoint is supplied
-          // after mount
-          this.props.UIOptions.dockedSidebarBreakpoint != null
-            ? this.props.UIOptions.dockedSidebarBreakpoint
-            : MQ_RIGHT_SIDEBAR_MIN_WIDTH
+        // NOTE this won't update if a different breakpoint is supplied
+        // after mount
+        this.props.UIOptions.dockedSidebarBreakpoint != null
+          ? this.props.UIOptions.dockedSidebarBreakpoint
+          : MQ_RIGHT_SIDEBAR_MIN_WIDTH
         }px)`,
       );
       const handler = () => {
@@ -1219,7 +1219,7 @@ class App extends React.Component<AppProps, AppState> {
     if (
       this.excalidrawContainerRef.current &&
       prevProps.UIOptions.dockedSidebarBreakpoint !==
-        this.props.UIOptions.dockedSidebarBreakpoint
+      this.props.UIOptions.dockedSidebarBreakpoint
     ) {
       this.refreshDeviceState(this.excalidrawContainerRef.current);
     }
@@ -1661,14 +1661,14 @@ class App extends React.Component<AppProps, AppState> {
       typeof opts.position === "object"
         ? opts.position.clientX
         : opts.position === "cursor"
-        ? cursorX
-        : this.state.width / 2 + this.state.offsetLeft;
+          ? cursorX
+          : this.state.width / 2 + this.state.offsetLeft;
     const clientY =
       typeof opts.position === "object"
         ? opts.position.clientY
         : opts.position === "cursor"
-        ? cursorY
-        : this.state.height / 2 + this.state.offsetTop;
+          ? cursorY
+          : this.state.height / 2 + this.state.offsetTop;
 
     const { x, y } = viewportCoordsToSceneCoords(
       { clientX, clientY },
@@ -1723,8 +1723,8 @@ class App extends React.Component<AppProps, AppState> {
           // from library, not when pasting from clipboard. Alas.
           openSidebar:
             this.state.openSidebar &&
-            this.device.canDeviceFitSidebar &&
-            this.state.defaultSidebarDockedPreference
+              this.device.canDeviceFitSidebar &&
+              this.state.defaultSidebarDockedPreference
               ? this.state.openSidebar
               : null,
           selectedElementIds: newElements.reduce(
@@ -1790,8 +1790,8 @@ class App extends React.Component<AppProps, AppState> {
             y: currentY,
             text,
             lineHeight,
-            terraform : null,
-            aws : null,
+            terraform: null,
+            aws: null,
           });
           acc.push(element);
           currentY += element.height + LINE_GAP;
@@ -2110,8 +2110,8 @@ class App extends React.Component<AppProps, AppState> {
             }
             return prop === "key"
               ? // CapsLock inverts capitalization based on ShiftKey, so invert
-                // it back
-                event.shiftKey
+              // it back
+              event.shiftKey
                 ? ev.key.toUpperCase()
                 : ev.key.toLowerCase()
               : value;
@@ -2250,7 +2250,7 @@ class App extends React.Component<AppProps, AppState> {
               if (
                 !this.state.editingLinearElement ||
                 this.state.editingLinearElement.elementId !==
-                  selectedElements[0].id
+                selectedElements[0].id
               ) {
                 this.history.resumeRecording();
                 this.setState({
@@ -2668,13 +2668,13 @@ class App extends React.Component<AppProps, AppState> {
       includeBoundTextElement && includeLockedElements
         ? this.scene.getNonDeletedElements()
         : this.scene
-            .getNonDeletedElements()
-            .filter(
-              (element) =>
-                (includeLockedElements || !element.locked) &&
-                (includeBoundTextElement ||
-                  !(isTextElement(element) && element.containerId)),
-            );
+          .getNonDeletedElements()
+          .filter(
+            (element) =>
+              (includeLockedElements || !element.locked) &&
+              (includeBoundTextElement ||
+                !(isTextElement(element) && element.containerId)),
+          );
 
     return getElementsAtPosition(elements, (element) =>
       hitTest(element, this.state, x, y),
@@ -2767,35 +2767,35 @@ class App extends React.Component<AppProps, AppState> {
     const element = existingTextElement
       ? existingTextElement
       : newTextElement({
-          x: parentCenterPosition
-            ? parentCenterPosition.elementCenterX
-            : sceneX,
-          y: parentCenterPosition
-            ? parentCenterPosition.elementCenterY
-            : sceneY,
-          strokeColor: this.state.currentItemStrokeColor,
-          backgroundColor: this.state.currentItemBackgroundColor,
-          fillStyle: this.state.currentItemFillStyle,
-          strokeWidth: this.state.currentItemStrokeWidth,
-          strokeStyle: this.state.currentItemStrokeStyle,
-          roughness: this.state.currentItemRoughness,
-          opacity: this.state.currentItemOpacity,
-          text: "",
-          fontSize,
-          fontFamily,
-          textAlign: parentCenterPosition
-            ? "center"
-            : this.state.currentItemTextAlign,
-          verticalAlign: parentCenterPosition
-            ? VERTICAL_ALIGN.MIDDLE
-            : DEFAULT_VERTICAL_ALIGN,
-          containerId: shouldBindToContainer ? container?.id : undefined,
-          groupIds: container?.groupIds ?? [],
-          lineHeight,
-          angle: container?.angle ?? 0,
-          terraform : null,
-          aws : null,
-        });
+        x: parentCenterPosition
+          ? parentCenterPosition.elementCenterX
+          : sceneX,
+        y: parentCenterPosition
+          ? parentCenterPosition.elementCenterY
+          : sceneY,
+        strokeColor: this.state.currentItemStrokeColor,
+        backgroundColor: this.state.currentItemBackgroundColor,
+        fillStyle: this.state.currentItemFillStyle,
+        strokeWidth: this.state.currentItemStrokeWidth,
+        strokeStyle: this.state.currentItemStrokeStyle,
+        roughness: this.state.currentItemRoughness,
+        opacity: this.state.currentItemOpacity,
+        text: "",
+        fontSize,
+        fontFamily,
+        textAlign: parentCenterPosition
+          ? "center"
+          : this.state.currentItemTextAlign,
+        verticalAlign: parentCenterPosition
+          ? VERTICAL_ALIGN.MIDDLE
+          : DEFAULT_VERTICAL_ALIGN,
+        containerId: shouldBindToContainer ? container?.id : undefined,
+        groupIds: container?.groupIds ?? [],
+        lineHeight,
+        angle: container?.angle ?? 0,
+        terraform: null,
+        aws: null,
+      });
 
     if (!existingTextElement && shouldBindToContainer && container) {
       mutateElement(container, {
@@ -3073,7 +3073,7 @@ class App extends React.Component<AppProps, AppState> {
       gesture.lastCenter =
         gesture.initialDistance =
         gesture.initialScale =
-          null;
+        null;
     }
 
     if (
@@ -3560,10 +3560,10 @@ class App extends React.Component<AppProps, AppState> {
       this.updateScene({
         ...(element.points.length < 10
           ? {
-              elements: this.scene
-                .getElementsIncludingDeleted()
-                .filter((el) => el.id !== element.id),
-            }
+            elements: this.scene
+              .getElementsIncludingDeleted()
+              .filter((el) => el.id !== element.id),
+          }
           : {}),
         appState: {
           draggingElement: null,
@@ -4337,8 +4337,8 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       simulatePressure: event.pressure === 0.5,
       locked: false,
-      terraform : null,
-      aws : null,
+      terraform: null,
+      aws: null,
     });
 
     this.setState((prevState) => ({
@@ -4395,8 +4395,8 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       opacity: this.state.currentItemOpacity,
       locked: false,
-      terraform : null,
-      aws : null,
+      terraform: null,
+      aws: null,
     });
 
     return element;
@@ -4488,8 +4488,8 @@ class App extends React.Component<AppProps, AppState> {
         startArrowhead,
         endArrowhead,
         locked: false,
-        terraform : null,
-        aws : null,
+        terraform: null,
+        aws: null,
       });
       this.setState((prevState) => ({
         selectedElementIds: {
@@ -4540,14 +4540,14 @@ class App extends React.Component<AppProps, AppState> {
       roundness:
         this.state.currentItemRoundness === "round"
           ? {
-              type: isUsingAdaptiveRadius(elementType)
-                ? ROUNDNESS.ADAPTIVE_RADIUS
-                : ROUNDNESS.PROPORTIONAL_RADIUS,
-            }
+            type: isUsingAdaptiveRadius(elementType)
+              ? ROUNDNESS.ADAPTIVE_RADIUS
+              : ROUNDNESS.PROPORTIONAL_RADIUS,
+          }
           : null,
       locked: false,
-      terraform : null,
-      aws : null,
+      terraform: null,
+      aws: null,
     });
 
     if (element.type === "selection") {
@@ -4760,7 +4760,7 @@ class App extends React.Component<AppProps, AppState> {
         this.state.editingLinearElement &&
         event.shiftKey &&
         this.state.editingLinearElement.elementId ===
-          pointerDownState.hit.element?.id;
+        pointerDownState.hit.element?.id;
       if (
         (hasHitASelectedElement ||
           pointerDownState.hit.hasHitCommonBoundingBoxOfSelectedElements) &&
@@ -4998,26 +4998,26 @@ class App extends React.Component<AppProps, AppState> {
                   ),
                   ...(pointerDownState.hit.element
                     ? {
-                        // if using ctrl/cmd, select the hitElement only if we
-                        // haven't box-selected anything else
-                        [pointerDownState.hit.element.id]:
-                          !elementsWithinSelection.length,
-                      }
+                      // if using ctrl/cmd, select the hitElement only if we
+                      // haven't box-selected anything else
+                      [pointerDownState.hit.element.id]:
+                        !elementsWithinSelection.length,
+                    }
                     : null),
                 },
                 showHyperlinkPopup:
                   elementsWithinSelection.length === 1 &&
-                  elementsWithinSelection[0].link
+                    elementsWithinSelection[0].link
                     ? "info"
                     : false,
                 // select linear element only when we haven't box-selected anything else
                 selectedLinearElement:
                   elementsWithinSelection.length === 1 &&
-                  isLinearElement(elementsWithinSelection[0])
+                    isLinearElement(elementsWithinSelection[0])
                     ? new LinearElementEditor(
-                        elementsWithinSelection[0],
-                        this.scene,
-                      )
+                      elementsWithinSelection[0],
+                      this.scene,
+                    )
                     : null,
               },
               this.scene.getNonDeletedElements(),
@@ -5089,7 +5089,7 @@ class App extends React.Component<AppProps, AppState> {
         if (
           !pointerDownState.boxSelection.hasOccurred &&
           pointerDownState.hit?.element?.id !==
-            this.state.editingLinearElement.elementId
+          this.state.editingLinearElement.elementId
         ) {
           this.actionManager.executeAction(actionFinalize);
         } else {
@@ -5370,10 +5370,10 @@ class App extends React.Component<AppProps, AppState> {
           );
           hitElements.forEach(
             (hitElement) =>
-              (pointerDownState.elementIdsToErase[hitElement.id] = {
-                erase: true,
-                opacity: hitElement.opacity,
-              }),
+            (pointerDownState.elementIdsToErase[hitElement.id] = {
+              erase: true,
+              opacity: hitElement.opacity,
+            }),
           );
         }
         this.eraseElements(pointerDownState);
@@ -5442,11 +5442,11 @@ class App extends React.Component<AppProps, AppState> {
                     // set selectedLinearElement only if thats the only element selected
                     selectedLinearElement:
                       newSelectedElements.length === 1 &&
-                      isLinearElement(newSelectedElements[0])
+                        isLinearElement(newSelectedElements[0])
                         ? new LinearElementEditor(
-                            newSelectedElements[0],
-                            this.scene,
-                          )
+                          newSelectedElements[0],
+                          this.scene,
+                        )
                         : prevState.selectedLinearElement,
                   },
                   this.scene.getNonDeletedElements(),
@@ -5471,9 +5471,9 @@ class App extends React.Component<AppProps, AppState> {
                 selectedElementIds: { [hitElement.id]: true },
                 selectedLinearElement:
                   isLinearElement(hitElement) &&
-                  // Don't set `selectedLinearElement` if its same as the hitElement, this is mainly to prevent resetting the `hoverPointIndex` to -1.
-                  // Future we should update the API to take care of setting the correct `hoverPointIndex` when initialized
-                  prevState.selectedLinearElement?.elementId !== hitElement.id
+                    // Don't set `selectedLinearElement` if its same as the hitElement, this is mainly to prevent resetting the `hoverPointIndex` to -1.
+                    // Future we should update the API to take care of setting the correct `hoverPointIndex` when initialized
+                    prevState.selectedLinearElement?.elementId !== hitElement.id
                     ? new LinearElementEditor(hitElement, this.scene)
                     : prevState.selectedLinearElement,
               },
@@ -5533,8 +5533,8 @@ class App extends React.Component<AppProps, AppState> {
         (isBindingEnabled(this.state)
           ? bindOrUnbindSelectedElements
           : unbindLinearElements)(
-          getSelectedElements(this.scene.getNonDeletedElements(), this.state),
-        );
+            getSelectedElements(this.scene.getNonDeletedElements(), this.state),
+          );
       }
 
       if (!activeTool.locked && activeTool.type !== "freedraw") {
@@ -5694,6 +5694,7 @@ class App extends React.Component<AppProps, AppState> {
               dataURL,
               created: Date.now(),
               lastRetrieved: Date.now(),
+              terraform_code: "",
             },
           };
           const cachedImageData = this.imageCache.get(fileId);
@@ -6054,8 +6055,8 @@ class App extends React.Component<AppProps, AppState> {
       // element from it
       editingGroupId:
         prevState.editingGroupId &&
-        hitElement != null &&
-        isElementInGroup(hitElement, prevState.editingGroupId)
+          hitElement != null &&
+          isElementInGroup(hitElement, prevState.editingGroupId)
           ? prevState.editingGroupId
           : null,
     }));
@@ -6246,15 +6247,15 @@ class App extends React.Component<AppProps, AppState> {
       {
         ...(element && !this.state.selectedElementIds[element.id]
           ? selectGroupsForSelectedElements(
-              {
-                ...this.state,
-                selectedElementIds: { [element.id]: true },
-                selectedLinearElement: isLinearElement(element)
-                  ? new LinearElementEditor(element, this.scene)
-                  : null,
-              },
-              this.scene.getNonDeletedElements(),
-            )
+            {
+              ...this.state,
+              selectedElementIds: { [element.id]: true },
+              selectedLinearElement: isLinearElement(element)
+                ? new LinearElementEditor(element, this.scene)
+                : null,
+            },
+            this.scene.getNonDeletedElements(),
+          )
           : this.state),
         showHyperlinkPopup: false,
       },

@@ -189,16 +189,17 @@ export const Sidebar = Object.assign(
 
     const { onStateChange } = props;
 
+    //이전 사이드바 상태를 저장하는 변수 생성(초기값은 openSidebar)
     const refPrevOpenSidebar = useRef(appState.openSidebar);
     useEffect(() => {
       if (
         // closing sidebar
-        ((!appState.openSidebar &&
+        ((!appState.openSidebar && //사이드바가 닫혀있는지 확인
           refPrevOpenSidebar?.current?.name === props.name) ||
           // opening current sidebar
-          (appState.openSidebar?.name === props.name &&
+          (appState.openSidebar?.name === props.name && //사이드바가 열려있는지 확인
             refPrevOpenSidebar?.current?.name !== props.name) ||
-          // switching tabs or switching to a different sidebar
+          // switching tabs or switching to a different sidebar //다른 사이드바로 전환되고 있는지 확인
           refPrevOpenSidebar.current?.name === props.name) &&
         appState.openSidebar !== refPrevOpenSidebar.current
       ) {
@@ -208,7 +209,7 @@ export const Sidebar = Object.assign(
             : appState.openSidebar,
         );
       }
-      refPrevOpenSidebar.current = appState.openSidebar;
+      refPrevOpenSidebar.current = appState.openSidebar; //값을 현재 사이드바 상태로 업데이트
     }, [appState.openSidebar, onStateChange, props.name]);
 
     const [mounted, setMounted] = useState(false);

@@ -69,6 +69,7 @@ export const LibraryMenuContent = ({
           elements,
           id: randomId(),
           created: Date.now(),
+          terraform_code: "",
         },
         ...libraryItems,
       ];

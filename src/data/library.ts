@@ -110,6 +110,7 @@ class Library {
       try {
         this.app.props.onLibraryChange?.(
           cloneLibraryItems(this.lastLibraryItems),
+
         );
       } catch (error) {
         console.error(error);
@@ -187,6 +188,7 @@ class Library {
 
             if (merge) { //업데이트 방법에 따라 라이브러리 항목을 병합 또는 교체
               resolve(mergeLibraryItems(this.lastLibraryItems, nextItems));
+              console.log(libraryItems);
             } else {
               resolve(nextItems);
             }
@@ -220,6 +222,8 @@ class Library {
         }//최신 라이브러리 항목을 기반으로 새 라이브러리 항목을 생성
 
         this.lastLibraryItems = cloneLibraryItems(await libraryItems);
+        console.log(libraryItems);
+
         //새로운 libraryItems를 현재 라이브러리 항목으로 설정
 
         resolve(this.lastLibraryItems);//업데이트된 라이브러리 항목을 반환
@@ -397,6 +401,7 @@ export const useHandleLibrary = ({
         } catch (error: any) {
           reject(error);
         }
+
       });
 
       const shouldPrompt = idToken !== excalidrawAPI.id;

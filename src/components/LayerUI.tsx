@@ -258,7 +258,7 @@ const LayerUI = ({
                             title={t("toolBar.hand")}
                             isMobile
                           />
-                          <ShapesSwitcher
+                          <ShapesSwitcher //도형 선택 도구 관리
                             appState={appState}
                             canvas={canvas}
                             activeTool={appState.activeTool}
@@ -269,15 +269,16 @@ const LayerUI = ({
                               });
                             }}
                           />
-                          {!appState.viewModeEnabled &&
+                          {!appState.viewModeEnabled && //뷰 모드 활성화 시 사이드바 트리거 숨김
                           (!isTerraformCodeSidebarDocked ||
                               appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
+                                //테라폼 사이드바 렌더링
                               <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
                           )}
-                          {/*여길 이렇게 추가하는게 맞는지 모르겠다 => 맞다 */}
                           {!appState.viewModeEnabled &&
                           (!isAwsLibSidebarDocked ||
                               appState.openSidebar?.name !== AWSLIB_SIDEBAR.name) && (
+                                //AWS 사이드바 렌더링
                               <tunnels.AwsLibSidebarTriggerTunnel.Out />
                           )}
                         </Stack.Row>

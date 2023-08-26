@@ -120,7 +120,6 @@ export const DefaultSidebar = Object.assign(
 );
 
 //여기서부터 TERRAFORMCODE_SIDEBAR 개발
-
 const TerraformCodeSidebarTrigger = withInternalFallback(
   "TerraformCodeSidebarTrigger",
   (
@@ -211,7 +210,7 @@ export const TerraformCodeSidebar = Object.assign(
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
               {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
-              <MonacoEditor code={'ex'} />
+              <MonacoEditor code={'example'}/*code={terraformCode*/ />
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>

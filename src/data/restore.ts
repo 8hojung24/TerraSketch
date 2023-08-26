@@ -93,15 +93,15 @@ const restoreElementWithProperties = <
     [PRECEDING_ELEMENT_KEY]?: string;
   },
   K extends Pick<T, keyof Omit<Required<T>, keyof ExcalidrawElement>>,
->(
-  element: T,
-  extra: Pick<
-    T,
-    // This extra Pick<T, keyof K> ensure no excess properties are passed.
-    // @ts-ignore TS complains here but type checks the call sites fine.
-    keyof K
-  > &
-    Partial<Pick<ExcalidrawElement, "type" | "x" | "y">>,
+  >(
+    element: T,
+    extra: Pick<
+      T,
+      // This extra Pick<T, keyof K> ensure no excess properties are passed.
+      // @ts-ignore TS complains here but type checks the call sites fine.
+      keyof K
+    > &
+      Partial<Pick<ExcalidrawElement, "type" | "x" | "y">>,
 ): T => {
   const base: Pick<T, keyof ExcalidrawElement> & {
     [PRECEDING_ELEMENT_KEY]?: string;
@@ -130,14 +130,14 @@ const restoreElementWithProperties = <
     roundness: element.roundness
       ? element.roundness
       : element.strokeSharpness === "round"
-      ? {
+        ? {
           // for old elements that would now use adaptive radius algo,
           // use legacy algo instead
           type: isUsingAdaptiveRadius(element.type)
             ? ROUNDNESS.LEGACY
             : ROUNDNESS.PROPORTIONAL_RADIUS,
         }
-      : null,
+        : null,
     boundElements: element.boundElementIds
       ? element.boundElementIds.map((id) => ({ type: "arrow", id }))
       : element.boundElements ?? [],
@@ -189,10 +189,10 @@ const restoreElement = (
         element.lineHeight ||
         (element.height
           ? // detect line-height from current element height and font-size
-            detectLineHeight(element)
+          detectLineHeight(element)
           : // no element height likely means programmatic use, so default
-            // to a fixed line height
-            getDefaultLineHeight(element.fontFamily));
+          // to a fixed line height
+          getDefaultLineHeight(element.fontFamily));
       const baseline = measureBaseline(
         element.text,
         getFontString(element),
@@ -228,6 +228,7 @@ const restoreElement = (
         status: element.status || "pending",
         fileId: element.fileId,
         scale: element.scale || [1, 1],
+        //terraform_code: element.terraform_code || "",
       });
     case "line":
     // @ts-ignore LEGACY type
@@ -244,9 +245,9 @@ const restoreElement = (
       let points = // migrate old arrow model to new one
         !Array.isArray(element.points) || element.points.length < 2
           ? [
-              [0, 0],
-              [element.width, element.height],
-            ]
+            [0, 0],
+            [element.width, element.height],
+          ]
           : element.points;
 
       if (points[0][0] !== 0 || points[0][1] !== 0) {
@@ -420,10 +421,10 @@ export const restoreElements = (
 
 const coalesceAppStateValue = <
   T extends keyof ReturnType<typeof getDefaultAppState>,
->(
-  key: T,
-  appState: Exclude<ImportedDataState["appState"], null | undefined>,
-  defaultAppState: ReturnType<typeof getDefaultAppState>,
+  >(
+    key: T,
+    appState: Exclude<ImportedDataState["appState"], null | undefined>,
+    defaultAppState: ReturnType<typeof getDefaultAppState>,
 ) => {
   const value = appState[key];
   // NOTE the value! assertion is needed in TS 4.5.5 (fixed in newer versions)
@@ -440,33 +441,33 @@ const LegacyAppStateMigrations: {
     return [
       "defaultSidebarDockedPreference",
       appState.isSidebarDocked ??
-        coalesceAppStateValue(
-          "defaultSidebarDockedPreference",
-          appState,
-          defaultAppState,
-        ),
+      coalesceAppStateValue(
+        "defaultSidebarDockedPreference",
+        appState,
+        defaultAppState,
+      ),
     ];
   },
   isTerraformCodeSidebarDocked: (appState, defaultAppState) => {
     return [
       "terraformcodeSidebarDockedPreference",
       appState.isTerraformCodeSidebarDocked ??
-        coalesceAppStateValue(
-          "terraformcodeSidebarDockedPreference",
-          appState,
-          defaultAppState,
-        ),
+      coalesceAppStateValue(
+        "terraformcodeSidebarDockedPreference",
+        appState,
+        defaultAppState,
+      ),
     ];
   },
   isAwsLibSidebarDocked: (appState, defaultAppState) => {
     return [
       "awslibSidebarDockedPreference",
       appState.isAwsLibSidebarDocked ??
-        coalesceAppStateValue(
-          "awslibSidebarDockedPreference",
-          appState,
-          defaultAppState,
-        ),
+      coalesceAppStateValue(
+        "awslibSidebarDockedPreference",
+        appState,
+        defaultAppState,
+      ),
     ];
   },
 };
@@ -507,8 +508,8 @@ export const restoreAppState = (
       suppliedValue !== undefined
         ? suppliedValue
         : localValue !== undefined
-        ? localValue
-        : defaultValue;
+          ? localValue
+          : defaultValue;
   }
 
   return {
@@ -533,16 +534,16 @@ export const restoreAppState = (
     zoom:
       typeof appState.zoom === "number"
         ? {
-            value: appState.zoom as NormalizedZoomValue,
-          }
+          value: appState.zoom as NormalizedZoomValue,
+        }
         : appState.zoom?.value
-        ? appState.zoom
-        : defaultAppState.zoom,
+          ? appState.zoom
+          : defaultAppState.zoom,
     openSidebar:
       // string (legacy)
       typeof (appState.openSidebar as any as string) === "string"
         // ? { name: DEFAULT_SIDEBAR.name }
-        ? { name: TERRAFORMCODE_SIDEBAR.name || AWSLIB_SIDEBAR.name}
+        ? { name: TERRAFORMCODE_SIDEBAR.name || AWSLIB_SIDEBAR.name }
         : nextAppState.openSidebar,
   };
 };
@@ -587,6 +588,7 @@ export const restoreLibraryItems = (
         elements: item,
         id: randomId(),
         created: Date.now(),
+        terraform_code: "",
       });
       if (restoredItem) {
         restoredItems.push(restoredItem);
@@ -594,13 +596,14 @@ export const restoreLibraryItems = (
     } else {
       const _item = item as MarkOptional<
         LibraryItem,
-        "id" | "status" | "created"
+        "id" | "status" | "created" | "terraform_code"
       >;
       const restoredItem = restoreLibraryItem({
         ..._item,
         id: _item.id || randomId(),
         status: _item.status || defaultStatus,
         created: _item.created || Date.now(),
+        terraform_code: ""
       });
       if (restoredItem) {
         restoredItems.push(restoredItem);
