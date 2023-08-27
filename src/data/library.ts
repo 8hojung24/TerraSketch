@@ -188,7 +188,7 @@ class Library {
 
             if (merge) { //업데이트 방법에 따라 라이브러리 항목을 병합 또는 교체
               resolve(mergeLibraryItems(this.lastLibraryItems, nextItems));
-              console.log(libraryItems);
+              //console.log(libraryItems);
             } else {
               resolve(nextItems);
             }
@@ -222,7 +222,7 @@ class Library {
         }//최신 라이브러리 항목을 기반으로 새 라이브러리 항목을 생성
 
         this.lastLibraryItems = cloneLibraryItems(await libraryItems);
-        console.log(libraryItems);
+        //console.log(libraryItems);
 
         //새로운 libraryItems를 현재 라이브러리 항목으로 설정
 
@@ -365,7 +365,6 @@ export const parseLibraryTokensFromUrl = () => {
   const idToken = libraryUrl
     ? new URLSearchParams(window.location.hash.slice(1)).get("token")
     : null;
-
   return libraryUrl ? { libraryUrl, idToken } : null;
 };
 

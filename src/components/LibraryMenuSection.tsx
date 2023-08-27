@@ -15,9 +15,9 @@ const CACHED_ROWS_RENDERED_PER_BATCH = 16;
 type LibraryOrPendingItem = (
   | LibraryItem
   | /* pending library item */ {
-      id: null;
-      elements: readonly NonDeleted<ExcalidrawElement>[];
-    }
+    id: null;
+    elements: readonly NonDeleted<ExcalidrawElement>[];
+  }
 )[];
 
 interface Props {

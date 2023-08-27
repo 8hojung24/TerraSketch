@@ -9,6 +9,7 @@ export const LibraryMenuControlButtons = ({
   style,
   children,
   className,
+  terraform_code,
 }: {
   libraryReturnUrl: ExcalidrawProps["libraryReturnUrl"];
   theme: UIAppState["theme"];
@@ -16,6 +17,7 @@ export const LibraryMenuControlButtons = ({
   style: React.CSSProperties;
   children?: React.ReactNode;
   className?: string;
+  terraform_code: string; //strign이 맞는지, Item..[] 인지
 }) => {
   return (
     <div

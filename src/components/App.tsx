@@ -308,6 +308,7 @@ import BraveMeasureTextError from "./BraveMeasureTextError";
 const AppContext = React.createContext<AppClassProperties>(null!);
 const AppPropsContext = React.createContext<AppProps>(null!);
 
+//디바이스정보
 const deviceContextInitialValue = {
   isSmScreen: false,
   isMobile: false,
@@ -318,6 +319,7 @@ const deviceContextInitialValue = {
 const DeviceContext = React.createContext<Device>(deviceContextInitialValue);
 DeviceContext.displayName = "DeviceContext";
 
+//Excalidraw 컨테이너와 관련된 정보
 export const ExcalidrawContainerContext = React.createContext<{
   container: HTMLDivElement | null;
   id: string | null;
@@ -329,6 +331,7 @@ const ExcalidrawElementsContext = React.createContext<
 >([]);
 ExcalidrawElementsContext.displayName = "ExcalidrawElementsContext";
 
+//getDefaultAppState() 함수에서 가져온 값과 추가적인 너비, 높이 등 앱 상태
 const ExcalidrawAppStateContext = React.createContext<AppState>({
   ...getDefaultAppState(),
   width: 0,
@@ -344,13 +347,15 @@ const ExcalidrawSetAppStateContext = React.createContext<
   console.warn("unitialized ExcalidrawSetAppStateContext context!");
 });
 ExcalidrawSetAppStateContext.displayName = "ExcalidrawSetAppStateContext";
-
+//Excalidraw 상태를 변경할 수 있는 함수
 const ExcalidrawActionManagerContext = React.createContext<ActionManager>(
   null!,
 );
 ExcalidrawActionManagerContext.displayName = "ExcalidrawActionManagerContext";
 
 export const useApp = () => useContext(AppContext);
+//useApp을 사용하는 컴포넌트에서 AppContext에 접근할 수 있게 함
+
 export const useAppProps = () => useContext(AppPropsContext);
 export const useDevice = () => useContext<Device>(DeviceContext);
 export const useExcalidrawContainer = () =>
@@ -364,10 +369,10 @@ export const useExcalidrawSetAppState = () =>
 export const useExcalidrawActionManager = () =>
   useContext(ExcalidrawActionManagerContext);
 
-let didTapTwice: boolean = false;
+let didTapTwice: boolean = false; //더블 탭 이벤트가 발생했는지
 let tappedTwiceTimer = 0;
-let cursorX = 0;
-let cursorY = 0;
+let cursorX = 0; //마우스 커서 위치 저장
+let cursorY = 0; //마우스 커서 위치 저장
 let isHoldingSpace: boolean = false;
 let isPanning: boolean = false;
 let isDraggingScrollBar: boolean = false;
@@ -391,42 +396,51 @@ const gesture: Gesture = {
   initialScale: null,
 };
 
+//화면을 구성하고 사용자 상호 작용을 처리
 class App extends React.Component<AppProps, AppState> {
   canvas: AppClassProperties["canvas"] = null;
-  rc: RoughCanvas | null = null;
+  rc: RoughCanvas | null = null; // 캔버스의 그리기 작업을 처리하는 도구
   unmounted: boolean = false;
-  actionManager: ActionManager;
+  actionManager: ActionManager; //사용자 작업을 추적하고 처리
   device: Device = deviceContextInitialValue;
-  detachIsMobileMqHandler?: () => void;
+  detachIsMobileMqHandler?: () => void; //모바일 여부
 
+  //캔버스 및 도형 등을 렌더링하기 위한 컨테이너 역할
   private excalidrawContainerRef = React.createRef<HTMLDivElement>();
 
+  //기본 속성 정의
   public static defaultProps: Partial<AppProps> = {
     // needed for tests to pass since we directly render App in many tests
     UIOptions: DEFAULT_UI_OPTIONS,
   };
 
-  public scene: Scene;
+  public scene: Scene; //씬(화면)을 관리
   private fonts: Fonts;
-  private resizeObserver: ResizeObserver | undefined;
-  private nearestScrollableContainer: HTMLElement | Document | undefined;
-  public library: AppClassProperties["library"];
-  public libraryItemsFromStorage: LibraryItems | undefined;
+  private resizeObserver: ResizeObserver | undefined; //화면 크기 조정
+  private nearestScrollableContainer: HTMLElement | Document | undefined; //화면 스크롤을 관리
+  public library: AppClassProperties["library"]; //라이브러리를 관리
+  public libraryItemsFromStorage: LibraryItems | undefined; //로컬 스토리지에서 로드된 라이브러리 아이템을 저장
   public id: string;
+  //여기에 terraform_code 추가하는게 맞나?
+  public terraform_code: string;
   private history: History;
   private excalidrawContainerValue: {
     container: HTMLDivElement | null;
     id: string;
   };
 
-  public files: BinaryFiles = {};
-  public imageCache: AppClassProperties["imageCache"] = new Map();
+  public files: BinaryFiles = {}; //파일과 관련된 작업
+  public imageCache: AppClassProperties["imageCache"] = new Map(); //이미지 파일에 대한 캐시가 저장
 
-  hitLinkElement?: NonDeletedExcalidrawElement;
+  hitLinkElement?: NonDeletedExcalidrawElement; //화면에서 클릭한 링크 엘리먼트
+  //최근에 마우스나 터치 디바이스로 화면을 터치한 위치 및 이벤트 정보
   lastPointerDown: React.PointerEvent<HTMLCanvasElement> | null = null;
+  //최근에 마우스 버튼을 놓은 위치와 이벤트 정보
   lastPointerUp: React.PointerEvent<HTMLElement> | PointerEvent | null = null;
+  //화면의 마지막 포인터 위치 (x, y)
   lastScenePointer: { x: number; y: number } | null = null;
 
+  //초기 설정 값을 변수로 추출
   constructor(props: AppProps) {
     super(props);
     const defaultAppState = getDefaultAppState();
@@ -438,7 +452,7 @@ class App extends React.Component<AppProps, AppState> {
       theme = defaultAppState.theme,
       name = defaultAppState.name,
     } = props;
-    this.state = {
+    this.state = {//애플리케이션의 현재 상태
       ...defaultAppState,
       theme,
       isLoading: true,
@@ -454,8 +468,8 @@ class App extends React.Component<AppProps, AppState> {
       terraformcodeSidebarDockedPreference: true,
       awslibSidebarDockedPreference: true,
     };
-
-    this.id = nanoid();
+    this.terraform_code = "";//맞나?
+    this.id = nanoid(); //고유한 id 값을 생성
     this.library = new Library(this);
     if (excalidrawRef) {
       const readyPromise =
@@ -512,10 +526,12 @@ class App extends React.Component<AppProps, AppState> {
     );
     this.actionManager.registerAll(actions);
 
+    //되돌리기
     this.actionManager.registerAction(createUndoAction(this.history));
     this.actionManager.registerAction(createRedoAction(this.history));
   }
 
+  //캔버스 요소를 렌더링
   private renderCanvas() {
     const canvasScale = window.devicePixelRatio;
     const {
@@ -571,6 +587,8 @@ class App extends React.Component<AppProps, AppState> {
     );
   }
 
+  //렌더링 결과물을 반환
+  //Excalidraw 애플리케이션의 UI 구성
   public render() {
     const selectedElement = getSelectedElements(
       this.scene.getNonDeletedElements(),
@@ -687,6 +705,7 @@ class App extends React.Component<AppProps, AppState> {
     return this.scene.getNonDeletedElements();
   };
 
+  //요소를 캔버스에 삽입
   public onInsertElements = (elements: readonly ExcalidrawElement[]) => {
     this.addElementsFromPasteOrLibrary({
       elements,
@@ -695,12 +714,13 @@ class App extends React.Component<AppProps, AppState> {
     });
   };
 
+  //이미지를 내보내는 작업
   public onExportImage = async (
-    type: keyof typeof EXPORT_IMAGE_TYPES,
-    elements: readonly NonDeletedExcalidrawElement[],
+    type: keyof typeof EXPORT_IMAGE_TYPES, //내보내는 이미지 타입
+    elements: readonly NonDeletedExcalidrawElement[], //내보낼 이미지에 포함할 Excalidraw 요소들의 배열
   ) => {
     trackEvent("export", type, "ui");
-    const fileHandle = await exportCanvas(
+    const fileHandle = await exportCanvas( //이미지 내보내기 작업
       type,
       elements,
       this.state,
@@ -718,24 +738,24 @@ class App extends React.Component<AppProps, AppState> {
       });
 
     if (
-      this.state.exportEmbedScene &&
+      this.state.exportEmbedScene && //이미지를 내장할지 여부
       fileHandle &&
       isImageFileHandle(fileHandle)
     ) {
       this.setState({ fileHandle });
     }
   };
-
+  // 액션이 실행된 후 애플리케이션 상태를 업데이트하고, 필요한 경우 UI에 변경사항을 반영
   private syncActionResult = withBatchedUpdates(
     (actionResult: ActionResult) => {
       if (this.unmounted || actionResult === false) {
         return;
       }
-
+      //현재 편집 중인 요소
       let editingElement: AppState["editingElement"] | null = null;
       if (actionResult.elements) {
         actionResult.elements.forEach((element) => {
-          if (
+          if (//편집 중인 요소가 변경되었을 경우 editingElement 변수에 할당
             this.state.editingElement?.id === element.id &&
             this.state.editingElement !== element &&
             isNonDeletedElement(element)
@@ -743,6 +763,7 @@ class App extends React.Component<AppProps, AppState> {
             editingElement = element;
           }
         });
+        //새로운 요소들로 화면을 갱신
         this.scene.replaceAllElements(actionResult.elements);
         if (actionResult.commitToHistory) {
           this.history.resumeRecording();
@@ -755,7 +776,7 @@ class App extends React.Component<AppProps, AppState> {
           : { ...this.files, ...actionResult.files };
         this.addNewImagesToImageCache();
       }
-
+      //애플리케이션 상태, 편집 중인 요소, 또는 컨텍스트 메뉴가 있는 경우 이를 처리
       if (actionResult.appState || editingElement || this.state.contextMenu) {
         if (actionResult.commitToHistory) {
           this.history.resumeRecording();
@@ -805,6 +826,7 @@ class App extends React.Component<AppProps, AppState> {
             });
           },
           () => {
+            //액션 결과에서 syncHistory가 true인 경우, 작업 기록을 동기화
             if (actionResult.syncHistory) {
               this.history.setCurrentState(
                 this.state,
@@ -906,13 +928,14 @@ class App extends React.Component<AppProps, AppState> {
       // whether to open the library, to handle a case where we
       // update the state outside of initialData (e.g. when loading the app
       // with a library install link, which should auto-open the library)
-      openSidebar: scene.appState?.openSidebar || this.state.openSidebar,
+      openSidebar: scene.appState?.openSidebar || this.state.openSidebar, //사이드바 열림 여부 설정
       activeTool:
+        //이미지 도구인 경우 "selection"으로 설정
         scene.appState.activeTool.type === "image"
           ? { ...scene.appState.activeTool, type: "selection" }
           : scene.appState.activeTool,
       isLoading: false,
-      toast: this.state.toast,
+      toast: this.state.toast, //토스트 메시지
     };
     if (initialData?.scrollToContent) {
       scene.appState = {
@@ -1411,6 +1434,7 @@ class App extends React.Component<AppProps, AppState> {
       document.querySelector(".excalidraw")!,
     ).getPropertyValue("--color-selection");
 
+    //애플리케이션에서 협업 세션 중에 씬을 렌더링
     renderScene(
       {
         elements: renderingElements,
@@ -4337,7 +4361,7 @@ class App extends React.Component<AppProps, AppState> {
       roundness: null,
       simulatePressure: event.pressure === 0.5,
       locked: false,
-      terraform: null,
+      terraform: null, //여기 왜있는거지?
       aws: null,
     });
 

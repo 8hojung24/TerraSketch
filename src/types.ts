@@ -448,6 +448,7 @@ export type AppClassProperties = {
   id: App["id"];
   onInsertElements: App["onInsertElements"];
   onExportImage: App["onExportImage"];
+  terraform_code: App["terraform_code"];
 };
 
 export type PointerDownState = Readonly<{

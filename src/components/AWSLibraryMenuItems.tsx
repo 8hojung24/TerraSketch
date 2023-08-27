@@ -343,6 +343,7 @@ export default function AWSLibraryMenuItems({
                         id={id}
                         libraryReturnUrl={libraryReturnUrl}
                         theme={theme}
+                        terraform_code={"test_terraform"} //일단 이렇게 해둠
                     >
                         <LibraryDropdownMenu
                             selectedItems={selectedItems}
