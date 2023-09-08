@@ -160,7 +160,7 @@ export default function LibraryMenuItems({
 
   //라이브러리 아이템을 클릭했을 때 실행되는 콜백 함수
   const onItemClick = useCallback(
-    (id: LibraryItem["terraform_code"] | null) => { //id 매개변수 받음
+    (id: LibraryItem["id"] | null) => { //id 매개변수 받음
       if (!id) { //id가 null인 경우
         onAddToLibrary(pendingElements);
       } else {
