@@ -13,6 +13,7 @@ import { Sidebar } from "./Sidebar/Sidebar";
 import MonacoEditor from './MonacoEditor';
 import { AWSLibraryMenu } from "./AWSLibraryMenu";
 
+//기본 사이드바 트리거
 const DefaultSidebarTrigger = withInternalFallback(
   "DefaultSidebarTrigger",
   (
@@ -22,7 +23,7 @@ const DefaultSidebarTrigger = withInternalFallback(
     const { DefaultSidebarTriggerTunnel } = useTunnels();
     return (
       <DefaultSidebarTriggerTunnel.In>
-        <Sidebar.Trigger
+        <Sidebar.Trigger // 사이드바 트리거 역할
           {...props}
           className="default-sidebar-trigger"
           name={DEFAULT_SIDEBAR.name}

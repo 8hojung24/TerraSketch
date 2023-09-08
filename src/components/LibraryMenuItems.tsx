@@ -15,6 +15,9 @@ import { duplicateElements } from "../element/newElement";
 import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
 import { LibraryDropdownMenu } from "./LibraryMenuHeaderContent";
 import LibraryMenuSection from "./LibraryMenuSection";
+import { useUIAppState } from "../context/ui-appState";
+import { useExcalidrawSetAppState } from "./App";
+import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
 
 import "./LibraryMenuItems.scss";
 
@@ -38,7 +41,6 @@ export default function LibraryMenuItems({
   theme: UIAppState["theme"];
   id: string;
   terraform_code: string;
-  //terraform_code: LibraryItem["terraform_code"]; //테라폼요소 정의
 }) {
   //React 훅을 사용하여 상태 변수를 초기화 //아니근데 이코드 왜 쓴거지?
   const [selectedItems, setSelectedItems] = useState<LibraryItem["terraform_code"][]>([]);
@@ -158,16 +160,27 @@ export default function LibraryMenuItems({
 
   //라이브러리 아이템을 클릭했을 때 실행되는 콜백 함수
   const onItemClick = useCallback(
-    (id: LibraryItem["id"] | null) => { //id 매개변수 받음
+    (id: LibraryItem["terraform_code"] | null) => { //id 매개변수 받음
       if (!id) { //id가 null인 경우
         onAddToLibrary(pendingElements);
       } else {
         onInsertLibraryItems(getInsertedElements(id));
-        //라이브러리 아이템의 엘리먼트 목록 반환
-        console.log("onInsertLibraryItems 테스트: ", id);
-        console.log("테라폼 테스트: ", terraform_code);
-        //여기가 확실하게 나오면 성공임
 
+        //라이브러리 아이템의 엘리먼트 목록 반환
+        console.log("ID 테스트: ", id);
+        console.log("기타 요소 테스트: ", terraform_code);
+        //여기가 확실하게 나오면 성공임
+        //여기서 선택된 id가 aws 요소면 코드 사이드바 오픈
+        if (id === "TEST IMAGE ID") {//여기부터
+          // Excalidraw 애플리케이션의 상태를 변경하여 코드 사이드바를 엽니다.
+          const setAppState = useExcalidrawSetAppState();
+          setAppState({
+            openSidebar: {
+              name: TERRAFORMCODE_SIDEBAR.name,
+              tab: "Terraform Sidebar Tab",
+            },
+          });//여기까지 추가
+        }
       }
     },
     [

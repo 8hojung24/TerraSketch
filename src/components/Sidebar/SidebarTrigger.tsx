@@ -6,17 +6,17 @@ import clsx from "clsx";
 import "./SidebarTrigger.scss";
 
 export const SidebarTrigger = ({
-  name,
-  tab,
+  name, //사이드바 이름
+  tab, //사이드바에서 열리는 탭
   icon,
-  title,
+  title, //트리거 툴팁(마우스 올릴 시 나타나는 설명)
   children,
-  onToggle,
+  onToggle, //사이드바가 열리거나 닫힐 때 호출할 콜백 함수
   className,
   style,
 }: SidebarTriggerProps) => {
   const setAppState = useExcalidrawSetAppState();
-  const appState = useUIAppState();
+  const appState = useUIAppState(); //상태 가져옴
 
   return (
     <label title={title}>

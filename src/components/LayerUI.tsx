@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react"; //useState 추가
 import { ActionManager } from "../actions/manager";
 import { CLASSES, DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_WIDTH, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
 import { isTextElement, showSelectedShapeActions } from "../element";
@@ -47,7 +47,7 @@ import { isHandToolActive } from "../appState";
 import { TunnelsContext, useInitializeTunnels } from "../context/tunnels";
 import { LibraryIcon, TerraformCodeIcon, AWSIcon } from "./icons";
 import { UIAppStateContext } from "../context/ui-appState";
-import { DefaultSidebar,TerraformCodeSidebar } from "./DefaultSidebar";
+import { DefaultSidebar, TerraformCodeSidebar } from "./DefaultSidebar";
 import { AwsLibSidebar } from "./AWSDefaultSidebar";
 
 import "./LayerUI.scss";
@@ -270,17 +270,17 @@ const LayerUI = ({
                             }}
                           />
                           {!appState.viewModeEnabled && //뷰 모드 활성화 시 사이드바 트리거 숨김
-                          (!isTerraformCodeSidebarDocked ||
+                            (!isTerraformCodeSidebarDocked ||
                               appState.openSidebar?.name !== TERRAFORMCODE_SIDEBAR.name) && (
-                                //테라폼 사이드바 렌더링
+                              //테라폼 사이드바 렌더링
                               <tunnels.TerraformCodeSidebarTriggerTunnel.Out />
-                          )}
+                            )}
                           {!appState.viewModeEnabled &&
-                          (!isAwsLibSidebarDocked ||
+                            (!isAwsLibSidebarDocked ||
                               appState.openSidebar?.name !== AWSLIB_SIDEBAR.name) && (
-                                //AWS 사이드바 렌더링
+                              //AWS 사이드바 렌더링
                               <tunnels.AwsLibSidebarTriggerTunnel.Out />
-                          )}
+                            )}
                         </Stack.Row>
                       </Island>
                     </Stack.Row>
@@ -360,6 +360,8 @@ const LayerUI = ({
   const isTerraformCodeSidebarDocked = useAtomValue(isTerraformCodeSidebarDockedAtom, jotaiScope);
   const isAwsLibSidebarDocked = useAtomValue(isAWSLibSidebarDockedAtom, jotaiScope);
 
+  //추가
+  //const [isTerraformCodeSidebarOpen, setTerraformCodeSidebarOpen] = useState(false);
 
   const layerUIJSX = (
     <>
@@ -388,13 +390,15 @@ const LayerUI = ({
       >
         {t("toolBar.library")}
       </DefaultSidebar.Trigger>
-     
+
+
       <TerraformCodeSidebar.Trigger
         __fallback
         icon={TerraformCodeIcon}
         title={capitalizeString(t("toolBar.terraformCode"))}
         onToggle={(open) => {
           if (open) {
+            //setTerraformCodeSidebarOpen(true);
             trackEvent(
               "sidebar",
               `${TERRAFORMCODE_SIDEBAR.name} (open)`,
@@ -484,8 +488,8 @@ const LayerUI = ({
             })}
             style={
               appState.openSidebar &&
-              isSidebarDocked && 
-              device.canDeviceFitSidebar
+                isSidebarDocked &&
+                device.canDeviceFitSidebar
                 ? { width: `calc(100% - ${LIBRARY_SIDEBAR_WIDTH}px)` }
                 : {}
             }
