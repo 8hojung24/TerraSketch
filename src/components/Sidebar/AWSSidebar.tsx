@@ -30,6 +30,8 @@ import { SidebarTab } from "./SidebarTab";
 
 import "./AWSSidebar.scss";
 import { useUIAppState } from "../../context/ui-appState";
+import { useAtom } from "jotai"; //230803
+
 
 // FIXME replace this with the implem from ColorPicker once it's merged
 const useOnClickOutside = (
@@ -143,7 +145,7 @@ export const AWSSidebarInner = forwardRef(
                         return;
                     }
                     if (!docked || !device.canDeviceFitSidebar) {
-                        closeLibrary();
+                        //closeLibrary(); 이부분 삭제(사이드바 외부 클릭 시 닫기는 효과 제거)
                     }
                 },
                 [closeLibrary, docked, device.canDeviceFitSidebar],
@@ -227,6 +229,13 @@ export const AWSSidebar = Object.assign(
         // HoC so that state is not shared between subcomponents when the wrapping
         // component is of the same type (e.g. Sidebar -> SidebarHeader).
         const shouldRender = mounted && appState.openSidebar?.name === props.name;
+
+        //230803
+        /*const [isAWSLibSidebarDocked] = useAtom(isAWSLibSidebarDockedAtom);
+        const shouldRender =
+        mounted &&
+        appState.openSidebar?.name === props.name &&
+        isAWSLibSidebarDocked;*/
 
         if (!shouldRender) {
             return null;
