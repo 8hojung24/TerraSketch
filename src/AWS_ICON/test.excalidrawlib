@@ -1,0 +1,90 @@
+{
+  "type": "excalidrawlib",
+  "version": 2,
+  "source": "http://localhost:3000",
+  "libraryItems": [
+    {
+      "status": "unpublished",
+      "elements": [
+        {
+          "id": "_kb0RL5KetbFj6DhA9y-P",
+          "type": "image",
+          "x": 374.19305356999035,
+          "y": 88.4090805053711,
+          "width": 522.8865979381443,
+          "height": 317,
+          "angle": 0,
+          "strokeColor": "transparent",
+          "backgroundColor": "transparent",
+          "fillStyle": "hachure",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "roughness": 1,
+          "opacity": 100,
+          "groupIds": [
+            "QU5iH1sLskA8nejOH1POX"
+          ],
+          "roundness": null,
+          "seed": 1166650392,
+          "version": 33,
+          "versionNonce": 265290344,
+          "isDeleted": false,
+          "boundElements": null,
+          "updated": 1692512032808,
+          "link": null,
+          "locked": false,
+          "terraform": null,
+          "aws": null,
+          "status": "saved",
+          "fileId": "0f25a6a0667815dcd11a1f2e97ebeb51b6ca895f",
+          "scale": [
+            1,
+            1
+          ]
+        },
+        {
+          "id": "CzHDFUCCShNVFIdhaPV8C",
+          "type": "text",
+          "x": 581.0909423828125,
+          "y": 226.1818084716797,
+          "width": 108,
+          "height": 45,
+          "angle": 0,
+          "strokeColor": "#1e1e1e",
+          "backgroundColor": "transparent",
+          "fillStyle": "hachure",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "roughness": 1,
+          "opacity": 100,
+          "groupIds": [
+            "QU5iH1sLskA8nejOH1POX"
+          ],
+          "roundness": null,
+          "seed": 1611826280,
+          "version": 78,
+          "versionNonce": 385202200,
+          "isDeleted": false,
+          "boundElements": null,
+          "updated": 1692512032808,
+          "link": null,
+          "locked": false,
+          "terraform": null,
+          "aws": null,
+          "text": "테스트",
+          "fontSize": 36,
+          "fontFamily": 1,
+          "textAlign": "left",
+          "verticalAlign": "top",
+          "baseline": 31,
+          "containerId": null,
+          "originalText": "테스트",
+          "lineHeight": 1.25
+        }
+      ],
+      "id": "X8RzDLiU-9FvVcj2mv9QB",
+      "created": 1692512036094,
+      "terraform_code": "hello"
+    }
+  ]
+}
