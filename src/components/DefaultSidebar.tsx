@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import clsx from "clsx";
 import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
 import { useTunnels } from "../context/tunnels";
@@ -9,7 +10,8 @@ import { useExcalidrawSetAppState } from "./App";
 import { withInternalFallback } from "./hoc/withInternalFallback";
 import { LibraryMenu } from "./LibraryMenu";
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
-import { Sidebar } from "./Sidebar/Sidebar";
+import { Sidebar } from "./Sidebar/Sidebar";                   
+
 import MonacoEditor from './MonacoEditor';
 import { AWSLibraryMenu } from "./AWSLibraryMenu";
 
@@ -202,6 +204,7 @@ export const TerraformCodeSidebar = Object.assign(
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     paddingRight: "1em",
+                    width: "100%"
                   }}
                 >
                   {t("toolBar.terraformCode")}
@@ -211,7 +214,7 @@ export const TerraformCodeSidebar = Object.assign(
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
               {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
-              <MonacoEditor code={'example'}/*code={terraformCode*/ />
+                <MonacoEditor code={'for i in range():\n\ta=1;\n\tb=2;'} style={{width:'200%', height:'100%'}}/>
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
