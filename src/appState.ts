@@ -17,7 +17,7 @@ const defaultExportScale = EXPORT_SCALES.includes(devicePixelRatio)
 
 export const getDefaultAppState = (): Omit<
   AppState,
-  "offsetTop" | "offsetLeft" | "width" | "height"
+  "offsetTop" | "offsetLeft" | "width" | "height" | "terraform"
 > => {
   return {
     showWelcomeScreen: false,
@@ -206,6 +206,7 @@ const APP_STATE_STORAGE_CONF = (<
   selectedLinearElement: { browser: true, export: false, server: false },
   currentItemTerraform: {browser: true, export: false, server: false},
   currentItemAws: {browser: true, export: false, server: false},
+  terraform: { browser: false, export: false, server: false },
 });
 
 const _clearAppStateForStorage = <

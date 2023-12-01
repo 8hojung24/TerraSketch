@@ -119,7 +119,8 @@ export type ExcalidrawElement =
   | ExcalidrawTextElement
   | ExcalidrawLinearElement
   | ExcalidrawFreeDrawElement
-  | ExcalidrawImageElement;
+  | ExcalidrawImageElement
+  | ExcalidrawTerraformElement;
 
 export type NonDeleted<TElement extends ExcalidrawElement> = TElement & {
   isDeleted: boolean;
@@ -180,6 +181,7 @@ export type ExcalidrawLinearElement = _ExcalidrawElementBase &
     endBinding: PointBinding | null;
     startArrowhead: Arrowhead | null;
     endArrowhead: Arrowhead | null;
+    terraform: string | null;
   }>;
 
 export type ExcalidrawArrowElement = ExcalidrawLinearElement &
@@ -197,3 +199,9 @@ export type ExcalidrawFreeDrawElement = _ExcalidrawElementBase &
   }>;
 
 export type FileId = string & { _brand: "FileId" };
+
+export type ExcalidrawTerraformElement = _ExcalidrawElementBase & 
+  Readonly<{
+    // terraform: string | null;
+    type: "terraform";
+}>;
