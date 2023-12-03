@@ -210,7 +210,7 @@ export const TerraformCodeSidebar = Object.assign(
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
               {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
-              <MonacoEditor code={'example'}/*code={terraformCode*/ />
+              <MonacoEditor code={'for i in range(5):\n\ta=1;\n\tb=2;'} style={{width:'100%', height:'100%'}} />
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
