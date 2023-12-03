@@ -12,6 +12,8 @@ import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
 import { Sidebar } from "./Sidebar/Sidebar";
 import MonacoEditor from './MonacoEditor';
 import { AWSLibraryMenu } from "./AWSLibraryMenu";
+import React, { useEffect } from 'react';
+import { firestorecode } from "../firebase";
 
 const DefaultSidebarTrigger = withInternalFallback(
   "DefaultSidebarTrigger",
@@ -67,6 +69,36 @@ export const DefaultSidebar = Object.assign(
 
       const { DefaultSidebarTabTriggersTunnel } = useTunnels();
 
+      /* Firestore 인스턴스를 확인하는 콘솔 로그 추가
+      useEffect(() => {
+        console.log('Firestore instance:', firestorecode); // firestore는 import 해와야 정상 작동합니다.
+      }, []); */
+
+     
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const collectionRef = firestorecode.collection('Terraform 5.21.0 버전'); // 여기에 컬렉션명을 입력하세요
+  
+            const snapshot = await collectionRef.get();
+  
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              // 여기에서 특정 필드에 있는 데이터를 가져올 수 있습니다.
+              // 예를 들어, 'field_name'은 가져오려는 필드명입니다.
+              const fieldValue = data.code;
+  
+              // 특정 필드의 값 콘솔에 출력
+              console.log(fieldValue);
+            });
+          } catch (error) {
+            console.error('Error fetching data: ', error);
+          }
+        };
+  
+        fetchData();
+      }, []);
+      
       return (
         <Sidebar
           {...rest}
