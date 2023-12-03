@@ -15,6 +15,7 @@ import { MIME_TYPES } from "../../constants";
 import { reconcileElements } from "../collab/reconciliation";
 import { getSyncableElements, SyncableExcalidrawElement } from ".";
 import { ResolutionType } from "../../utility-types";
+import * as firebase from 'firebase/app';
 
 // private
 // -----------------------------------------------------------------------------

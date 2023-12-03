@@ -1,3 +1,4 @@
+import React, { useRef, useEffect, useState } from 'react';
 import clsx from "clsx";
 import { DEFAULT_SIDEBAR, LIBRARY_SIDEBAR_TAB, TERRAFORMCODE_SIDEBAR, TERRAFORMCODE_SIDEBAR_TAB, AWSLIB_SIDEBAR, AWSLIB_SIDEBAR_TAB } from "../constants";
 import { useTunnels } from "../context/tunnels";
@@ -9,10 +10,14 @@ import { useExcalidrawSetAppState } from "./App";
 import { withInternalFallback } from "./hoc/withInternalFallback";
 import { LibraryMenu } from "./LibraryMenu";
 import { SidebarProps, SidebarTriggerProps } from "./Sidebar/common";
-import { Sidebar } from "./Sidebar/Sidebar";
+import { Sidebar } from "./Sidebar/Sidebar";                   
+
 import MonacoEditor from './MonacoEditor';
 import { AWSLibraryMenu } from "./AWSLibraryMenu";
+import { firestorecode } from "../firebase";
+import { Firestore } from 'firebase/firestore';
 
+//기본 사이드바 트리거
 const DefaultSidebarTrigger = withInternalFallback(
   "DefaultSidebarTrigger",
   (
@@ -22,7 +27,7 @@ const DefaultSidebarTrigger = withInternalFallback(
     const { DefaultSidebarTriggerTunnel } = useTunnels();
     return (
       <DefaultSidebarTriggerTunnel.In>
-        <Sidebar.Trigger
+        <Sidebar.Trigger // 사이드바 트리거 역할
           {...props}
           className="default-sidebar-trigger"
           name={DEFAULT_SIDEBAR.name}
@@ -173,6 +178,34 @@ export const TerraformCodeSidebar = Object.assign(
       const setAppState = useExcalidrawSetAppState();
 
       const { TerraformCodeSidebarTabTriggersTunnel } = useTunnels();
+      const [fieldValues, setFieldValues] = useState<string |undefined>(undefined);
+
+      /*DB Firebase 연동*/
+      useEffect(() => {     //useEffect 사용이유: 렌더링과 관련없어서, 비동기적으로 데이터를 가져오기 위해 사용됨.
+        const fetchData = async () => {
+          try {
+            const collectionRef = firestorecode.collection('Terraform 5.21.0 버전');
+            const snapshot = await collectionRef.get();
+            let fieldValue: string[] = [];
+    
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              // 여기에서 특정 필드에 있는 데이터를 가져올 수 있습니다.
+              // 예를 들어, 'field_name'은 가져오려는 필드명입니다.
+              fieldValue.push(data.code);
+              // 특정 필드의 값 콘솔에 출력
+              console.log(fieldValue);
+            });
+          setFieldValues(fieldValue.join('\n'));
+
+          } catch (error) {
+            console.error('Error fetching data: ', error);
+          }
+        };
+        fetchData();
+      }, []);
+      /*DB Firebase 연동 FIN*/
+      // const returnValue = fieldValues.join('\n');
 
       return (
         <Sidebar
@@ -201,6 +234,7 @@ export const TerraformCodeSidebar = Object.assign(
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     paddingRight: "1em",
+                    width: "100%"
                   }}
                 >
                   {t("toolBar.terraformCode")}
@@ -210,7 +244,7 @@ export const TerraformCodeSidebar = Object.assign(
             </Sidebar.Header>
             <Sidebar.Tab tab={TERRAFORMCODE_SIDEBAR_TAB}>
               {/* Terraform Code창 작성필요 (ex.<LibraryMenu/>) */}
-              <MonacoEditor code={'for i in range(5):\n\ta=1;\n\tb=2;'} style={{width:'100%', height:'100%'}} />
+              <MonacoEditor code={fieldValues ?? ''} style={{width:'200%', height:'100%'}}/>
             </Sidebar.Tab>
             {children}
           </Sidebar.Tabs>
