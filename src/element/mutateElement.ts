@@ -103,6 +103,7 @@ export const mutateElement = <TElement extends Mutable<ExcalidrawElement>>(
   return element;
 };
 
+/*매핑에서 이 함수도 봐야함. 테스트*/
 export const newElementWith = <TElement extends ExcalidrawElement>(
   element: TElement,
   updates: ElementUpdate<TElement>,

@@ -222,7 +222,7 @@ class Library {
         }//최신 라이브러리 항목을 기반으로 새 라이브러리 항목을 생성
 
         this.lastLibraryItems = cloneLibraryItems(await libraryItems);
-        console.log(libraryItems);
+        //console.log(libraryItems);
 
         //새로운 libraryItems를 현재 라이브러리 항목으로 설정
 

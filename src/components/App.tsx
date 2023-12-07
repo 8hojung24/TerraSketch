@@ -1645,12 +1645,16 @@ class App extends React.Component<AppProps, AppState> {
     },
   );
 
+  /*라이브러리 클릭하여 보드에 옮길시 실행되는 함수*/
   private addElementsFromPasteOrLibrary = (opts: {
     elements: readonly ExcalidrawElement[];
     files: BinaryFiles | null;
     position: { clientX: number; clientY: number } | "cursor" | "center";
     retainSeed?: boolean;
   }) => {
+    /*restoreElements 함수가 올리는 친구임 테스트*/
+    /*맵핑 id 호출 테스트테스트테스트테스트*/
+    
     const elements = restoreElements(opts.elements, null);
     const [minX, minY, maxX, maxY] = getCommonBounds(elements);
 
@@ -1680,6 +1684,7 @@ class App extends React.Component<AppProps, AppState> {
 
     const [gridX, gridY] = getGridPoint(dx, dy, this.state.gridSize);
 
+    /* 새로운 파일생성하지 않고, 테스트 해봄*/
     const newElements = duplicateElements(
       elements.map((element) => {
         return newElementWith(element, {
@@ -1691,6 +1696,7 @@ class App extends React.Component<AppProps, AppState> {
         randomizeSeed: !opts.retainSeed,
       },
     );
+    /*여기가 테스트 끝*/
 
     const nextElements = [
       ...this.scene.getElementsIncludingDeleted(),
