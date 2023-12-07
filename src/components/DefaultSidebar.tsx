@@ -194,7 +194,7 @@ export const TerraformCodeSidebar = Object.assign(
               // 예를 들어, 'field_name'은 가져오려는 필드명입니다.
               fieldValue.push(data.code);
               // 특정 필드의 값 콘솔에 출력
-              console.log(fieldValue);
+              // console.log(fieldValue);
             });
           setFieldValues(fieldValue.join('\n'));
 

@@ -16,7 +16,7 @@ const YourComponent = () => {
           const fieldValue = data.code;
 
           // 특정 필드의 값 콘솔에 출력
-          console.log(fieldValue);
+          // console.log(fieldValue);
         });
       } catch (error) {
         console.error('Error fetching data: ', error);
