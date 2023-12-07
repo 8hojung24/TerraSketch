@@ -187,21 +187,22 @@ export const TerraformCodeSidebar = Object.assign(
             const collectionRef = firestorecode.collection('Terraform 5.21.0 버전');
             const snapshot = await collectionRef.get();
             let fieldValue: string[] = [];
-            /*이름(아니면id값)을 가지고 온다고 한다고 가정.
-            받아온 애들 들어간 변수명은 일단 receiveNames
+            /*id값(아니면 이름_을 가지고 온다고 한다고 가정.
             나중에 id나 읽어들이는거 성공하면 여기만 좀 수정하면 됨! */
-            const receivedNames = ['VPC', 'tgw-vpc-attachment', 'dx-gw']; 
+            const receivedIds = ['d5VTWq_fEeEE7USYsWWeX', 'd5VTWq_fEeEE7USYsWWeX','d5VTWq_fEeEE7USYsWWeX']; 
 
-            snapshot.forEach((doc) => {
+            // 중복을 허용하여 받아온 값의 모든 ID를 고려
+           for (const rsname of receivedIds) {
+              snapshot.forEach((doc) => {
               const data = doc.data();
-              const rsname = data.resource_name;
-              // 받아온 id 값들 중에서 일치하는 경우에만 fieldValue에 추가합니다.
-              if (receivedNames.includes(rsname)) {
-                fieldValue.push(data.code);
-                console.log(fieldValue);
-              }
+              const id = data.ID;
+
+            if (id === rsname) {
+              fieldValue.push(data.code);
+              console.log(fieldValue); // 여기서 출력
+          }
             });
-             
+          } 
           setFieldValues(fieldValue.join('\n'));
 
           } catch (error) {
