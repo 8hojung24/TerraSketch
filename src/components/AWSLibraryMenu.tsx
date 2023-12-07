@@ -67,7 +67,8 @@ export const LibraryMenuContent = ({
                 {
                     status: "unpublished",
                     elements,
-                    id: randomId(),
+                    id: id,
+                    //id: randomId(),
                     created: Date.now(),
                     terraform_code: "a",
                 },

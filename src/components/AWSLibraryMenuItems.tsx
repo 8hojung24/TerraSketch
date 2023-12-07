@@ -215,7 +215,8 @@ export default function AWSLibraryMenuItems({
             } else {
                 onInsertLibraryItems(getInsertedElements(id));
                 //클릭 항목이 유효할 경우 캔버스에 삽입하기 전 id와 바인딩
-            } //console.log(id);
+            } 
+            console.log(id);
         },
         [
             getInsertedElements,

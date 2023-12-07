@@ -188,8 +188,7 @@ export const TerraformCodeSidebar = Object.assign(
             const snapshot = await collectionRef.get();
             let fieldValue: string[] = [];
             /*이름(아니면id값)을 가지고 온다고 한다고 가정.
-            받아온 애들 들어간 변수명은 일단 receiveNames
-            나중에 id나 읽어들이는거 성공하면 여기만 좀 수정하면 됨! */
+            받아온 애들 들어간 변수명은 일단 receiveNames. 나중에 id나 읽어들이는거 성공하면 여기만 좀 수정하면 됨! */
             const receivedNames = ['VPC', 'tgw-vpc-attachment', 'dx-gw']; 
 
             snapshot.forEach((doc) => {
