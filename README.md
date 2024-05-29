@@ -1,4 +1,5 @@
 "TERRASKETCH"
+![1716997182928.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/64a9fdb8-28b5-4965-b9fe-a86ca6399f42)
 "Terraform" + "Sketch"
 
 프로젝트 목적 및 필요성
@@ -14,3 +15,7 @@ Infra Editor System UI
 ![1716996576582.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856)
 
 ![1716996577592.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/8695a43e-f5a0-44fb-ad3e-93e607889536)
+
+보안 검사
+![1716997183923.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/a5215b7a-faf9-492b-93d0-27986db95232)
+
