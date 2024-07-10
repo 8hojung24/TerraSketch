@@ -1,5 +1,4 @@
 ## TERRASKETCH
-<br/>
 <img src=https://github.com/8hojung24/TerraSketch/assets/67528774/dfbfd00b-d5af-4cdd-8418-82fb7962fd7c width=300>
 
 <br/>
