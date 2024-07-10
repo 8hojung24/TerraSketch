@@ -22,7 +22,7 @@ Terraform을 이용하여 사용자가 구성한 클라우드 인프라를 IaC �
 
 ## Infra Editor System UI
 
-<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856" width="400">
+<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856" width="420">
 <img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/8695a43e-f5a0-44fb-ad3e-93e607889536" width="430">
 
 ## 보안 검사
