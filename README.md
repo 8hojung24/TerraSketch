@@ -60,12 +60,12 @@ Terraform을 이용하여 사용자가 구성한 클라우드 인프라를 IaC �
     - IaC를 통해 IAM 설정을 자동화할 경우, 코드 기반의 일관된 정책 적용, 자동화, 버전 관리가 가능하며, IAM 설정의 변경 사항을 추적하여 보안 위협에 대응할 수 있다.
     <br/>
     <div style="text-align: center;">
-      <img src="https://github.com/8hojung24/TerraSketch/assets/67528774/662323cd-8a63-4fd8-8f83-4809e3427c9d" width="400">
+      <img src="https://github.com/8hojung24/TerraSketch/assets/67528774/662323cd-8a63-4fd8-8f83-4809e3427c9d" width="450">
     </div>
 
 4. **데이터베이스 설정**
     - IaC 데이터베이스 설정 및 저장소 암호화와 관련하여 클라우드 내 개인정보의 안전한 저장과 전송을 보장하기 위해 보안 정책을 수립하고 관리해야한다.
     <br/>
     <div style="text-align: center;">
-      <img src="https://github.com/8hojung24/TerraSketch/assets/67528774/bf4135b1-1dfc-467e-8fee-29a9c638b392" width="400">
+      <img src="https://github.com/8hojung24/TerraSketch/assets/67528774/bf4135b1-1dfc-467e-8fee-29a9c638b392" width="450">
     </div>
