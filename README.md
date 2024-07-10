@@ -13,13 +13,12 @@
 
 
 IaC 코드 렌더링 시스템 흐름도
-![1716996950749.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/0e1c80f2-13f5-4f03-9702-e437a0599fda){: width="50" height="50"}
-
+<img src=https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/0e1c80f2-13f5-4f03-9702-e437a0599fda width='300'>
 Infra Editor System UI
-![1716996576582.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856){: width="50" height="50"}
+<img src=https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856 width='300'>
 
-![1716996577592.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/8695a43e-f5a0-44fb-ad3e-93e607889536){: width="50" height="50"}
+<img src=https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/8695a43e-f5a0-44fb-ad3e-93e607889536 width='300'>
 
 보안 검사
-![1716997183923.jpg](https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/a5215b7a-faf9-492b-93d0-27986db95232){: width="50" height="50"}
+<img src=https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/a5215b7a-faf9-492b-93d0-27986db95232 width='300'>
 
