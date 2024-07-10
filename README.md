@@ -1,4 +1,5 @@
 TERRASKETCH
+<br/>
 <img src=https://github.com/8hojung24/TerraSketch/assets/67528774/dfbfd00b-d5af-4cdd-8418-82fb7962fd7c width=300><br/>
 Terraform을 이용하여 사용자가 구성한 클라우드 인프라를 IaC 기반의 환경으로 자동화하는 동시에, 시각적인 다이어그램을 통해 인프라 구조를 한눈에 볼 수 있도록 하는 웹 서비스
 
