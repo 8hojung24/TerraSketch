@@ -16,7 +16,7 @@ Terraform을 이용하여 사용자가 구성한 클라우드 인프라를 IaC �
 
 <br/>
 TerraSketch 시스템 설계
-<br/><img src=ttps://github.com/8hojung24/TerraSketch/assets/67528774/b6aa41f2-9b24-4369-9a16-06342698e24d width=500>
+<br/><img src=https://github.com/8hojung24/TerraSketch/assets/67528774/b6aa41f2-9b24-4369-9a16-06342698e24d width=500>
 
 <br/>
 IaC 코드 렌더링 시스템 흐름도
