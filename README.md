@@ -1,4 +1,4 @@
-![image](https://github.com/8hojung24/TerraSketch/assets/67528774/b20da6d9-0c1d-48e4-9aca-c125442e3964)##**TERRASKETCH**
+##**TERRASKETCH**
 <br/>
 <img src=https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/64a9fdb8-28b5-4965-b9fe-a86ca6399f42 width=300>
 <br/>
