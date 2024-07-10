@@ -20,13 +20,13 @@ Terraform을 이용하여 사용자가 구성한 클라우드 인프라를 IaC �
 <br/>
 
 ## Infra Editor System UI
-<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856" width="400">
+<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/889ba481-d1e4-4d21-bceb-e9ff5f841856" width="500">
 <br/>
-<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/8695a43e-f5a0-44fb-ad3e-93e607889536" width="400">
+<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/8695a43e-f5a0-44fb-ad3e-93e607889536" width="500">
 <br/>
 
 ## 보안 검사
-<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/a5215b7a-faf9-492b-93d0-27986db95232" width="400">
+<img src="https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/a5215b7a-faf9-492b-93d0-27986db95232" width="500">
 <br/>
 
 ## IaC 코드 안전성
@@ -34,7 +34,7 @@ Terraform을 이용하여 사용자가 구성한 클라우드 인프라를 IaC �
     - KMS(Key Management Service)를 통해 키를 관리할 때, 보안 위험을 최소화하기 위해 관리자 역할과 암복호화 역할을 분리해야 하며, IAM 또는 키 정책 작성 시 kms 값에 와일드카드를 사용하지 않아야 합니다.
     - IaC 구성 파일에 민감한 정보를 하드코딩하지 않고, 비밀 관리 도구를 사용해 안전하게 관리해야 합니다.
     <br/><div style="text-align: center;">
-      <img src="https://github.com/8hojung24/TerraSketch/assets/67528774/2f43eb8f-244c-477b-bd9a-9fe89ee12187" width="400">
+      <img src="https://github.com/8hojung24/TerraSketch/assets/67528774/2f43eb8f-244c-477b-bd9a-9fe89ee12187" width="500">
     </div>
 
 2. **네트워크 설정**
