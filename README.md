@@ -1,4 +1,4 @@
-##**TERRASKETCH**
+## TERRASKETCH
 <br/>
 <img src=https://github.com/Cloud-IaC-Diagram/TerraSketch/assets/67528774/64a9fdb8-28b5-4965-b9fe-a86ca6399f42 width=300>
 <br/>
